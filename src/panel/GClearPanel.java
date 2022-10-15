@@ -13,11 +13,16 @@ public class GClearPanel extends JPanel implements ActionListener {
     JButton btnRe = new JButton(new ImageIcon("images/icon_game_return.png"));
     JButton btnRank = new JButton(new ImageIcon("images/icon_game_rank.png"));
 
+    JTextArea textScore = new JTextArea("0");
+
     public GClearPanel(){
         setLayout(null);
 
         btnRe.setBounds(549, 488, 226, 57);
         btnRank.setBounds(814, 488, 149, 57);
+
+        textScore.setBounds(465, 373, 200, 45);
+
 
         //	버튼 윤곽선, 배경색 없애기
         btnRe.setBorderPainted(false); btnRe.setContentAreaFilled(false);
@@ -25,6 +30,7 @@ public class GClearPanel extends JPanel implements ActionListener {
 
         add(btnRe);
         add(btnRank);
+        add(textScore);
 
         btnRe.addActionListener(this);
         btnRank.addActionListener(this);
