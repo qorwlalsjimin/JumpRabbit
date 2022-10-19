@@ -32,6 +32,11 @@ public class GamePanel extends JPanel implements ActionListener {
 		btnGameOver.addActionListener(this);
 		btnGameClear.addActionListener(this);
 
+		ScoreDB.score = 500;
+
+		//DB¿¡ insert
+
+
 	}
 
 

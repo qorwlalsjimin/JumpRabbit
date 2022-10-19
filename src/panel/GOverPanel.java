@@ -13,6 +13,8 @@ public class GOverPanel extends JPanel implements ActionListener {
     JButton btnRe = new JButton(new ImageIcon("images/icon_game_return.png"));
     JButton btnRank = new JButton(new ImageIcon("images/icon_game_rank.png"));
 
+    JLabel labelScore = new JLabel(Integer.toString(ScoreDB.score));
+
     public GOverPanel(){
         setLayout(null);
 
