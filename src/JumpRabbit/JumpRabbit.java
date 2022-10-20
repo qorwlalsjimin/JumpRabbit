@@ -37,7 +37,7 @@ public class JumpRabbit extends JFrame {
 		panel.add("over", pOver);
 		panel.add("clear", pClear);
 
-		card.show(panel, "rank"); // 실행하자 마자 보이는
+		card.show(panel, "intro"); // 실행하자 마자 보이는
 
 		panel.setBounds(0,0,1200,800);
 

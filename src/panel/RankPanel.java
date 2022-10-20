@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -52,17 +56,29 @@ public class RankPanel extends JPanel implements ActionListener {
 
     private void printRanking() {
 
-        //파일 입출력시 ArrayList에 데이터 추가
-        try (
-                FileReader fr = new FileReader("src/test.txt");
-                BufferedReader br = new BufferedReader(fr);
-        ) {
-            String readLine = null;
-            while ((readLine = br.readLine()) != null) {
-                this.listScore.add(readLine);
+        try{
+            String url = "jdbc:mysql://localhost:3306/jumprabbit";
+            String userName = "jumprabbit";
+            String password = "jumprabbit";
+            String sql = "select * from user_score";
+
+            Connection conn = DriverManager.getConnection(url, userName, password);
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while(rs.next()){
+                String name = rs.getString("name");
+                int score = rs.getInt("score");
+
+                this.listScore.add(name);
+                this.listScore.add(Integer.toString(score));
             }
-        } catch (IOException e) {
-            System.out.println("파일 불러오기 실패");
+
+            st.close();
+            rs.close();
+            conn.close();
+        }catch (Exception e){
+
         }
 
         // score을 넣은 리스트(int)
@@ -102,7 +118,7 @@ public class RankPanel extends JPanel implements ActionListener {
             labelRank.setBounds(X_RANK, Y_LABEL + 50 * rank, W_RANK, H_LABEL);
 
         labelRank.setFont(new Font("Airal",0, 29));
-        labelRank.setForeground(Color.decode("#000000"));
+        labelRank.setForeground(Color.decode("#ff42a5"));
         add(labelRank);
     }
 
