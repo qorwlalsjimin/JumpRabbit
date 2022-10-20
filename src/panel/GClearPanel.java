@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 public class GClearPanel extends JPanel implements ActionListener {
     ImageIcon clearScreen = new ImageIcon("images/screen_gameclear.png");
@@ -25,7 +28,6 @@ public class GClearPanel extends JPanel implements ActionListener {
         labelScore.setFont(new Font("Airal",0, 41));
         labelScore.setForeground(Color.decode("#ff42a5"));
 
-
         //	버튼 윤곽선, 배경색 없애기
         btnRe.setBorderPainted(false); btnRe.setContentAreaFilled(false);
         btnRank.setBorderPainted(false); btnRank.setContentAreaFilled(false);
@@ -36,6 +38,8 @@ public class GClearPanel extends JPanel implements ActionListener {
 
         btnRe.addActionListener(this);
         btnRank.addActionListener(this);
+
+        insertScore();
     }
 
 
@@ -53,5 +57,28 @@ public class GClearPanel extends JPanel implements ActionListener {
             JumpRabbit.setCureentPanel("game");
         else if(ob == btnRank)
             JumpRabbit.setCureentPanel("rank");
+    }
+
+    public void insertScore(){
+        try{
+            String url = "jdbc:mysql://localhost:3306/jumprabbit";
+            String userName = "jumprabbit";
+            String password = "jumprabbit";
+            String sql = "INSERT INTO user_score VALUES (?,?)";
+
+            Connection conn = DriverManager.getConnection(url, userName, password);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, "은영");
+            pstmt.setInt(2, 500);
+
+            //pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+            conn.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
