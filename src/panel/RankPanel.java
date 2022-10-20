@@ -2,7 +2,7 @@ package panel;
 
 import JumpRabbit.JumpRabbit;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -14,10 +14,10 @@ import java.util.Collections;
 import javax.swing.*;
 
 public class RankPanel extends JPanel implements ActionListener {
-    final int X_RANK = 370;
+    final int X_RANK = 380;
     final int X_NAME = 450;
     final int X_SCORE = 660;
-    final int Y_LABEL = 350;
+    final int Y_LABEL = 290;
 
     final int W_RANK = 30;
     final int W_NAME = 100;
@@ -44,10 +44,13 @@ public class RankPanel extends JPanel implements ActionListener {
 
         // 순위 보여주는 라벨
         printRanking();
+
+        try{
+            new ScoreDB();
+        }catch(Exception e){}
     }
 
     private void printRanking() {
-        System.out.println("메서드 실행");
 
         //파일 입출력시 ArrayList에 데이터 추가
         try (
@@ -55,9 +58,8 @@ public class RankPanel extends JPanel implements ActionListener {
                 BufferedReader br = new BufferedReader(fr);
         ) {
             String readLine = null;
-            while ((readLine = br.readLine()) != null) { //　왜이렇게하지?
+            while ((readLine = br.readLine()) != null) {
                 this.listScore.add(readLine);
-                System.out.println(readLine);
             }
         } catch (IOException e) {
             System.out.println("파일 불러오기 실패");
@@ -65,8 +67,8 @@ public class RankPanel extends JPanel implements ActionListener {
 
         // score을 넣은 리스트(int)
         ArrayList<Integer> listScore = new ArrayList<Integer>();
-        for (int i = 1; i <= this.listScore.size() / 3; i++) {
-            listScore.add(Integer.valueOf((String) this.listScore.get(3 * i - 2)));
+        for (int i = 1; i <= this.listScore.size() / 2; i++) {
+            listScore.add(Integer.valueOf((String) this.listScore.get(2 * i - 1)));
         }
         Collections.sort(listScore); //정렬
 
@@ -80,35 +82,50 @@ public class RankPanel extends JPanel implements ActionListener {
         for (int i = listScore2.size(); i >= 1; i--) { //
             int x = this.listScore.indexOf(listScore2.get(i - 1)); //listScore의 인덱스값 1, 4,7..찾기
             rank++;
-            callAllGen(x, rank);
+            callAllGen(x, rank, i);
         }
 
     }
 
-    private void callAllGen(int x, int rank) { // x는 스코어가 높은 점수대로 넣어줘야함
+    private void callAllGen(int x, int rank, int i) { // x는 스코어가 높은 점수대로 넣어줘야함
         // y는 x가 몇개들어가는지에따라서 1~n까지 for문으로 넣어줌 -> callAllGen메소드출력갯수만큼 똑같겠다
-
-        genRank(Integer.toString(rank), rank);
-        genName(x - 1, rank);
-        genScore(x, rank);
+        genRank(Integer.toString(rank), rank, i);
+        genName(x - 1, rank, i);
+        genScore(x, rank, i);
     }
 
-    private void genRank(String number, int rank) {
+    private void genRank(String number, int rank, int i) {
         labelRank = new JLabel(number);
-        labelRank.setBounds(X_RANK, Y_LABEL + 25 * rank, W_RANK, H_LABEL);
+        if(i==0)
+            labelRank.setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
+        else
+            labelRank.setBounds(X_RANK, Y_LABEL + 50 * rank, W_RANK, H_LABEL);
+
+        labelRank.setFont(new Font("Airal",0, 29));
+        labelRank.setForeground(Color.decode("#000000"));
         add(labelRank);
     }
 
 
-    private void genName(int index, int rank) {
+    private void genName(int index, int rank, int i) {
         labelName = new JLabel((String) listScore.get(index));
-        labelName.setBounds(X_NAME, Y_LABEL + 25 * rank, W_NAME, H_LABEL);
+        if(i==0)
+            labelRank.setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
+        else
+            labelName.setBounds(X_NAME, Y_LABEL + 50 * rank, W_NAME, H_LABEL);
+        labelName.setFont(new Font("Airal",0, 29));
+        labelName.setForeground(Color.decode("#ff42a5"));
         add(labelName);
     }
 
-    private void genScore(int index, int rank) {
+    private void genScore(int index, int rank, int i) {
         labelScore = new JLabel((String) listScore.get(index));
-        labelScore.setBounds(X_SCORE, Y_LABEL + 25 * rank, W_SCORE, H_LABEL);
+        if(i==0)
+            labelRank.setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
+        else
+            labelScore.setBounds(X_SCORE, Y_LABEL + 50 * rank, W_SCORE, H_LABEL);
+        labelScore.setFont(new Font("Airal",0, 29));
+        labelScore.setForeground(Color.decode("#ff42a5"));
         add(labelScore);
     }
 

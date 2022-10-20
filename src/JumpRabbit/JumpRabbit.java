@@ -55,7 +55,6 @@ public class JumpRabbit extends JFrame {
 
 	public static void setCureentPanel(String s) {
 		currentPanel = s;
-		System.out.println("세터 실행!");
 		changeCard();
 	}
 
