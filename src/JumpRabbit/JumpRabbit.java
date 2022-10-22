@@ -16,7 +16,7 @@ public class JumpRabbit extends JFrame {
 	// ÆÐ³Î
 	IntroPanel pIntro = new IntroPanel();
 	HowPanel pHow = new HowPanel();
-	RankPanel pRank = new RankPanel();
+	static RankPanel pRank = new RankPanel();
 	GamePanel pGame = new GamePanel();
 	GOverPanel pOver = new GOverPanel();
 	GClearPanel pClear = new GClearPanel();
@@ -72,6 +72,7 @@ public class JumpRabbit extends JFrame {
 
 			case "rank":
 				card.show(panel, "rank");
+				pRank.printRanking();
 				break;
 
 			case "game":
@@ -84,6 +85,7 @@ public class JumpRabbit extends JFrame {
 
 			case "clear":
 				card.show(panel, "clear");
+				(new GClearPanel()).insertScore();
 				break;
 		}
 	}

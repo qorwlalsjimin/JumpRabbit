@@ -45,16 +45,10 @@ public class RankPanel extends JPanel implements ActionListener {
 	    btnRankBack.setBorderPainted(false); btnRankBack.setContentAreaFilled(false);
 	    add(btnRankBack);
         btnRankBack.addActionListener(this);
-
-        // 순위 보여주는 라벨
-        printRanking();
-
-        try{
-            new ScoreDB();
-        }catch(Exception e){}
     }
 
-    private void printRanking() {
+    public void printRanking() {
+        System.out.println("랭킹 메서드 진입");
 
         try{
             String url = "jdbc:mysql://localhost:3306/jumprabbit";
@@ -73,6 +67,8 @@ public class RankPanel extends JPanel implements ActionListener {
                 this.listScore.add(name);
                 this.listScore.add(Integer.toString(score));
             }
+
+            System.out.println("select됨");
 
             st.close();
             rs.close();
@@ -101,6 +97,7 @@ public class RankPanel extends JPanel implements ActionListener {
             callAllGen(x, rank, i);
         }
 
+        this.listScore.clear();
     }
 
     private void callAllGen(int x, int rank, int i) { // x는 스코어가 높은 점수대로 넣어줘야함

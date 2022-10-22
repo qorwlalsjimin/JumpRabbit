@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public class GClearPanel extends JPanel implements ActionListener {
     ImageIcon clearScreen = new ImageIcon("images/screen_gameclear.png");
@@ -38,8 +39,6 @@ public class GClearPanel extends JPanel implements ActionListener {
 
         btnRe.addActionListener(this);
         btnRank.addActionListener(this);
-
-        insertScore();
     }
 
 
@@ -69,14 +68,17 @@ public class GClearPanel extends JPanel implements ActionListener {
             Connection conn = DriverManager.getConnection(url, userName, password);
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, "은영");
-            pstmt.setInt(2, 500);
+            pstmt.setString(1, "먀");
+            pstmt.setInt(2, 40);
 
-            //pstmt.executeUpdate();
+            pstmt.executeUpdate();
+            System.out.println("insert됨");
 
             pstmt.close();
             conn.close();
             conn.close();
+        }catch (SQLIntegrityConstraintViolationException e) {
+            System.out.println("이미 존재하는 아이디입니다.");
         }catch (Exception e){
             e.printStackTrace();
         }
