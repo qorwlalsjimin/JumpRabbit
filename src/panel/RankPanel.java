@@ -34,6 +34,9 @@ public class RankPanel extends JPanel implements ActionListener {
     ImageIcon rankScreen = new ImageIcon("images/screen_rank.png");
 
     JLabel labelRank, labelName, labelScore;
+    ArrayList<JLabel> listRank = new ArrayList<>();
+    ArrayList<JLabel> listName = new ArrayList<>();
+    ArrayList<JLabel> listGrade = new ArrayList<>();
 
     private ArrayList listScore = new ArrayList();
 
@@ -49,8 +52,12 @@ public class RankPanel extends JPanel implements ActionListener {
 
     public void printRanking() {
         System.out.println("랭킹 메서드 진입");
+        this.listScore.clear();
+        clearAllGen();
+
 
         try{
+
             String url = "jdbc:mysql://localhost:3306/jumprabbit";
             String userName = "jumprabbit";
             String password = "jumprabbit";
@@ -74,7 +81,7 @@ public class RankPanel extends JPanel implements ActionListener {
             rs.close();
             conn.close();
         }catch (Exception e){
-
+            e.printStackTrace();
         }
 
         // score을 넣은 리스트(int)
@@ -97,7 +104,8 @@ public class RankPanel extends JPanel implements ActionListener {
             callAllGen(x, rank, i);
         }
 
-        this.listScore.clear();
+        listScore.clear();
+        listScore2.clear();
     }
 
     private void callAllGen(int x, int rank, int i) { // x는 스코어가 높은 점수대로 넣어줘야함
@@ -108,40 +116,52 @@ public class RankPanel extends JPanel implements ActionListener {
     }
 
     private void genRank(String number, int rank, int i) {
-        labelRank = new JLabel(number);
+        listRank.add(new JLabel((number)));
         if(i==0)
-            labelRank.setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
+            listRank.get(rank-1).setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
         else
-            labelRank.setBounds(X_RANK, Y_LABEL + 50 * rank, W_RANK, H_LABEL);
+            listRank.get(rank-1).setBounds(X_RANK, Y_LABEL + 50 * rank, W_RANK, H_LABEL);
 
-        labelRank.setFont(new Font("Airal",0, 29));
-        labelRank.setForeground(Color.decode("#ff42a5"));
-        add(labelRank);
+        listRank.get(rank-1).setFont(new Font("Airal",0, 29));
+        listRank.get(rank-1).setForeground(Color.decode("#ff42a5"));
+        add(listRank.get(rank-1));
     }
 
 
     private void genName(int index, int rank, int i) {
-        labelName = new JLabel((String) listScore.get(index));
+        listName.add(new JLabel((String) listScore.get(index)));
         if(i==0)
-            labelRank.setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
+            listName.get(rank-1).setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
         else
-            labelName.setBounds(X_NAME, Y_LABEL + 50 * rank, W_NAME, H_LABEL);
-        labelName.setFont(new Font("Airal",0, 29));
-        labelName.setForeground(Color.decode("#ff42a5"));
-        add(labelName);
+            listName.get(rank-1).setBounds(X_NAME, Y_LABEL + 50 * rank, W_NAME, H_LABEL);
+        listName.get(rank-1).setFont(new Font("Airal",0, 29));
+        listName.get(rank-1).setForeground(Color.decode("#ff42a5"));
+        add(listName.get(rank-1));
     }
 
     private void genScore(int index, int rank, int i) {
-        labelScore = new JLabel((String) listScore.get(index));
+        listGrade.add(new JLabel((String) listScore.get(index)));
         if(i==0)
-            labelRank.setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
+            listGrade.get(rank-1).setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
         else
-            labelScore.setBounds(X_SCORE, Y_LABEL + 50 * rank, W_SCORE, H_LABEL);
-        labelScore.setFont(new Font("Airal",0, 29));
-        labelScore.setForeground(Color.decode("#ff42a5"));
-        add(labelScore);
+            listGrade.get(rank-1).setBounds(X_SCORE, Y_LABEL + 50 * rank, W_SCORE, H_LABEL);
+        listGrade.get(rank-1).setFont(new Font("Airal",0, 29));
+        listGrade.get(rank-1).setForeground(Color.decode("#ff42a5"));
+        add(listGrade.get(rank-1));
     }
 
+    private void clearAllGen(){
+        for(int i = 0; i<listRank.size(); i++){
+            this.remove(listRank.get(i));
+            this.remove(listName.get(i));
+            this.remove(listGrade.get(i));
+        }
+
+        listRank.clear();
+        listName.clear();
+        listGrade.clear();
+
+    }
 	public void paintComponent(Graphics g) {
 		g.drawImage(rankScreen.getImage(), 0, 0, null);
 		setOpaque(false);

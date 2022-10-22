@@ -68,8 +68,8 @@ public class GClearPanel extends JPanel implements ActionListener {
             Connection conn = DriverManager.getConnection(url, userName, password);
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, "¸Ï");
-            pstmt.setInt(2, 40);
+            pstmt.setString(1, "¶Öºü");
+            pstmt.setInt(2, 450);
 
             pstmt.executeUpdate();
             System.out.println("insertµÊ");
