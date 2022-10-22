@@ -110,9 +110,11 @@ public class RankPanel extends JPanel implements ActionListener {
 
     private void callAllGen(int x, int rank, int i) { // x는 스코어가 높은 점수대로 넣어줘야함
         // y는 x가 몇개들어가는지에따라서 1~n까지 for문으로 넣어줌 -> callAllGen메소드출력갯수만큼 똑같겠다
-        genRank(Integer.toString(rank), rank, i);
-        genName(x - 1, rank, i);
-        genScore(x, rank, i);
+        if(rank<8){
+            genRank(Integer.toString(rank), rank, i);
+            genName(x - 1, rank, i);
+            genScore(x, rank, i);
+        }
     }
 
     private void genRank(String number, int rank, int i) {
