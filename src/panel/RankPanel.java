@@ -91,6 +91,8 @@ public class RankPanel extends JPanel implements ActionListener {
         }
         Collections.sort(listScore); //정렬
 
+        System.out.println(listScore.toString());
+
         // score을 넣은 리스트(String)
         ArrayList<String> listScore2 = new ArrayList<String>();
         for (int i = 0; i < listScore.size(); i++) { //int타입인 isScore를 다시 String으로
@@ -119,6 +121,7 @@ public class RankPanel extends JPanel implements ActionListener {
 
     private void genRank(String number, int rank, int i) {
         listRank.add(new JLabel((number)));
+        listRank.get(rank-1).setFont(new Font("Neo둥근모", Font.PLAIN, 43));
         if(i==0)
             listRank.get(rank-1).setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
         else
@@ -132,17 +135,19 @@ public class RankPanel extends JPanel implements ActionListener {
 
     private void genName(int index, int rank, int i) {
         listName.add(new JLabel((String) listScore.get(index)));
+        listName.get(rank-1).setFont(new Font("Neo둥근모", Font.PLAIN, 28));
+        listName.get(rank-1).setForeground(Color.decode("#ff42a5"));
+
         if(i==0)
             listName.get(rank-1).setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
         else
             listName.get(rank-1).setBounds(X_NAME, Y_LABEL + 50 * rank, W_NAME, H_LABEL);
-        listName.get(rank-1).setFont(new Font("Airal",0, 29));
-        listName.get(rank-1).setForeground(Color.decode("#ff42a5"));
         add(listName.get(rank-1));
     }
 
     private void genScore(int index, int rank, int i) {
         listGrade.add(new JLabel((String) listScore.get(index)));
+        listGrade.get(rank-1).setFont(new Font("Neo둥근모", Font.PLAIN, 41));
         if(i==0)
             listGrade.get(rank-1).setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
         else
