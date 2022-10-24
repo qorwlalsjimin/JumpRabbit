@@ -23,8 +23,8 @@ public class RankPanel extends JPanel implements ActionListener {
     final int X_SCORE = 660;
     final int Y_LABEL = 290;
 
-    final int W_RANK = 30;
-    final int W_NAME = 100;
+    final int W_RANK = 300;
+    final int W_NAME = 300;
     final int W_SCORE = 200;
     final int H_LABEL = 50;
 
