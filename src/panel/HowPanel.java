@@ -43,6 +43,6 @@ public class HowPanel extends JPanel implements ActionListener{
 		Object ob = e.getSource();
 
 		if(ob == btnHowStart)
-			JumpRabbit.setCureentPanel("game");
+			JumpRabbit.setCureentPanel("login");
 	}
 }

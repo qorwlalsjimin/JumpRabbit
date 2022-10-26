@@ -4,12 +4,12 @@ public class RankDatas {
     private String name;
     private int score;
 
+    public RankDatas(){};
 
-    public String getName(){
-        return name;
-    }
-    public int getScore(){
-        return score;
+    public RankDatas(String name, int score) {
+        super();
+        this.name = name;
+        this.score = score;
     }
 }
 

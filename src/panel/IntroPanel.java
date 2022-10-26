@@ -61,7 +61,7 @@ public class IntroPanel extends JPanel implements ActionListener{
 		Object ob = e.getSource();
 
 		if(ob == btnStart)
-			JumpRabbit.setCureentPanel("game");
+			JumpRabbit.setCureentPanel("login");
 		else if(ob == btnHow)
 			JumpRabbit.setCureentPanel("how");
 		else if(ob == btnRank)
