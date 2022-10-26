@@ -22,6 +22,7 @@ public class JumpRabbit extends JFrame {
 	GClearPanel pClear = new GClearPanel();
 	LoginPanel pLogin = new LoginPanel();
 	JoinPanel pJoin = new JoinPanel();
+	JoinNamePanel pJoinName = new JoinNamePanel();
 
     //게임 화면 설정
     public JumpRabbit(){
@@ -40,6 +41,7 @@ public class JumpRabbit extends JFrame {
 		panel.add("clear", pClear);
 		panel.add("login",pLogin);
 		panel.add("join",pJoin);
+		panel.add("nickname", pJoinName);
 
 		card.show(panel, "intro"); // 실행하자 마자 보이는
 
@@ -98,6 +100,10 @@ public class JumpRabbit extends JFrame {
 
 			case "join":
 				card.show(panel, "join");
+				break;
+
+			case "nickname":
+				card.show(panel, "nickname");
 				break;
 		}
 	}

@@ -50,6 +50,7 @@ public class IntroPanel extends JPanel implements ActionListener{
         add(btnRank);
     }
 
+	// 배경 이미지 설정
 	public void paintComponent(Graphics g) {
 		g.drawImage(mainScreen.getImage(), 0, 0, null);
 		setOpaque(false);

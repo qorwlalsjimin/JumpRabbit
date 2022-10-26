@@ -169,6 +169,8 @@ public class RankPanel extends JPanel implements ActionListener {
         listGrade.clear();
 
     }
+
+    // 배경 이미지 설정
 	public void paintComponent(Graphics g) {
 		g.drawImage(rankScreen.getImage(), 0, 0, null);
 		setOpaque(false);

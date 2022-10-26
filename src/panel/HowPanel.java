@@ -31,7 +31,7 @@ public class HowPanel extends JPanel implements ActionListener{
 	    
     }
 
-
+	// 배경 이미지 설정
 	public void paintComponent(Graphics g) {
 		g.drawImage(howScreen.getImage(), 0, 0, null);
 		setOpaque(false);

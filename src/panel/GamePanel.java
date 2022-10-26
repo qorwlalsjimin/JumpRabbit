@@ -39,13 +39,14 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	}
 
-
+	// 배경 이미지 설정
 	public void paintComponent(Graphics g) {
 		g.drawImage(gameScreen.getImage(), 0, 0, null);
 		setOpaque(false);
         super.paintComponent(g);
     }
 
+	//버튼 클릭 리스너
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
