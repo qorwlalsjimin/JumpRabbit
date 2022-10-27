@@ -15,12 +15,12 @@ import java.sql.PreparedStatement;
 public class JoinNamePanel extends JPanel implements ActionListener, KeyListener {
 
 	JLabel labelNotice = new JLabel("닉네임을 입력하세요");
-	JTextField textNickname = new JTextField();
+	static public JTextField textNickname = new JTextField();
 	ImageIcon howScreen = new ImageIcon("images/screen_join.png");
 
 	JButton btn = new JButton("이동 버튼");
 
-	static public String inputID, inputPW;
+	static public String inputID;
 
 	public JoinNamePanel() {
 		setLayout(null);
@@ -58,14 +58,16 @@ public class JoinNamePanel extends JPanel implements ActionListener, KeyListener
 				String url = "jdbc:mysql://localhost:3306/jumprabbit";
 				String userName = "jumprabbit";
 				String password = "jumprabbit";
-				String sql = "insert into user_information values(?,?,?);";
+				String sql = "update user_information set name = ? where id=?;";
 
 				Connection conn = DriverManager.getConnection(url, userName, password);
 				PreparedStatement pt = conn.prepareStatement(sql);
 
-				pt.setString(1, inputID);
-				pt.setString(2, inputPW);
-				pt.setString(3, textNickname.getText());
+				pt.setString(1, textNickname.getText());
+				pt.setString(2, inputID);
+
+				int r = pt.executeUpdate();
+				System.out.println("바뀐 row: " + r);
 
 				pt.close();
 				conn.close();

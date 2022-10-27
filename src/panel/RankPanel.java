@@ -84,6 +84,7 @@ public class RankPanel extends JPanel implements ActionListener {
             e.printStackTrace();
         }
 
+        // TODO: 점수가 같으면 하나의 닉네임으로만 보이는 오류
         // score을 넣은 리스트(int)
         ArrayList<Integer> listScore = new ArrayList<Integer>();
         for (int i = 1; i <= this.listScore.size() / 2; i++) {

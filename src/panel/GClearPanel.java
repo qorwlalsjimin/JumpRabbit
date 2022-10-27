@@ -58,6 +58,8 @@ public class GClearPanel extends JPanel implements ActionListener {
             JumpRabbit.setCureentPanel("rank");
     }
 
+    // TODO: 같은 닉네임이 DB에 있으면 update문으로 처리
+    // TODO: table의 name(닉네임) 컬럼 FK로 사용하기
     public void insertScore(){
         try{
             String url = "jdbc:mysql://localhost:3306/jumprabbit";
@@ -68,7 +70,7 @@ public class GClearPanel extends JPanel implements ActionListener {
             Connection conn = DriverManager.getConnection(url, userName, password);
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, "뚬빠");
+            pstmt.setString(1, JoinNamePanel.textNickname.getText());
             pstmt.setInt(2, 450);
 
             pstmt.executeUpdate();
@@ -77,8 +79,8 @@ public class GClearPanel extends JPanel implements ActionListener {
             pstmt.close();
             conn.close();
             conn.close();
-        }catch (SQLIntegrityConstraintViolationException e) {
-            System.out.println("이미 존재하는 아이디입니다.");
+        //}catch (SQLIntegrityConstraintViolationException e) {
+        //    System.out.println("이미 존재하는 아이디입니다.");
         }catch (Exception e){
             e.printStackTrace();
         }

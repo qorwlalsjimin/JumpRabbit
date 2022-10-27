@@ -104,7 +104,13 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 				rs.close();
 				conn.close();
 			}catch (Exception exception){
-				if(exception.toString().contains("Illegal operation on empty result set.")){
+				if (textID.getText().isEmpty()){
+					System.out.println("아이디를 입력해주세요.");
+				}
+				else if (textPW.getText().isEmpty()){
+					System.out.println("비밀번호를 입력해주세요.");
+				}
+				else if(exception.toString().contains("Illegal operation on empty result set.")){
 					System.out.println("해당하는 아이디가 없습니다.");
 					textID.setText("");
 					textPW.setText("");

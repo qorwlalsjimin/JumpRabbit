@@ -19,7 +19,7 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 	JLabel labelPW = new JLabel("PW");
 	JTextField textID = new JTextField();
 	JTextField textPW = new JTextField();
-    ImageIcon howScreen = new ImageIcon("images/screen_join.png");
+    ImageIcon howScreen = new ImageIcon("images/screen_login.png");
 
 	JButton btn = new JButton("이동 버튼");
 
@@ -64,36 +64,33 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 
 		if(ob == btn){
 			try{
+
 				String url = "jdbc:mysql://localhost:3306/jumprabbit";
 				String userName = "jumprabbit";
 				String password = "jumprabbit";
-				String sql = "select pw from user_information where id='"+inputID+"';";
+				String sql = "insert into user_information(id, pw) values(?,?);";
 
 				Connection conn = DriverManager.getConnection(url, userName, password);
-				Statement st = conn.createStatement();
-				ResultSet rs = st.executeQuery(sql);
-				System.out.println(rs);
-				rs.next();
+				PreparedStatement pt = conn.prepareStatement(sql);
 
-				// TODO: db에 없는 아이디인지 확인
-//				if(inputPW.equals(rs.getString("pw"))){
-//
-//					JumpRabbit.setCureentPanel("game");
-//				}
-//				else{
-//					System.out.println("비밀번호가 틀렸습니다.");
-//					textPW.setText("");
-//				}
+				pt.setString(1, inputID);
+				pt.setString(2, inputPW);
 
-				st.close();
-				rs.close();
+				pt.executeUpdate();
+
+				pt.close();
 				conn.close();
+
+				JoinNamePanel.inputID = inputID.toString();
+				JumpRabbit.setCureentPanel("nickname");
+
 			}catch (Exception exception){
 				//중복 id 체크
-				exception.printStackTrace();
+				if(exception.toString().contains("PRIMARY"))
+					System.out.println("이미 존재하는 아이디입니다.");
+				else
+					System.out.println("오류가 발생했습니다.");
 			}
-
-			JumpRabbit.setCureentPanel("nickname");
 		}
 	}
 
