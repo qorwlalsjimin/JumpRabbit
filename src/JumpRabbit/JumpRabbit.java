@@ -91,7 +91,7 @@ public class JumpRabbit extends JFrame {
 
 			case "clear":
 				card.show(panel, "clear");
-				(new GClearPanel()).insertScore();
+				(new GClearPanel()).insertScore(false);
 				break;
 
 			case "login":

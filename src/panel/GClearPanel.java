@@ -58,31 +58,47 @@ public class GClearPanel extends JPanel implements ActionListener {
             JumpRabbit.setCureentPanel("rank");
     }
 
-    // TODO: 같은 닉네임이 DB에 있으면 update문으로 처리
     // TODO: table의 name(닉네임) 컬럼 FK로 사용하기
-    public void insertScore(){
+    public void insertScore(boolean isExist){
         try{
             String url = "jdbc:mysql://localhost:3306/jumprabbit";
             String userName = "jumprabbit";
             String password = "jumprabbit";
-            String sql = "INSERT INTO user_score VALUES (?,?)";
+            String sql = null;
 
             Connection conn = DriverManager.getConnection(url, userName, password);
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt = null;
 
-            pstmt.setString(1, JoinNamePanel.textNickname.getText());
-            pstmt.setInt(2, 450);
+            if(!isExist){ //닉네임 없음 insert
+                sql = "INSERT INTO user_score VALUES (?,?)";
+                pstmt = conn.prepareStatement(sql);
 
+                pstmt.setString(1, JoinNamePanel.textNickname.getText());
+                pstmt.setInt(2, 450);
+
+                System.out.println("insert됨");
+            }else{ //닉네임 있음 update
+                sql = "update user_score set score=? where name=?;";
+                pstmt = conn.prepareStatement(sql);
+
+                pstmt.setInt(1, 450);
+                pstmt.setString(2, JoinNamePanel.textNickname.getText());
+
+                System.out.println("update됨");
+            }
             pstmt.executeUpdate();
-            System.out.println("insert됨");
 
             pstmt.close();
             conn.close();
-            conn.close();
-        //}catch (SQLIntegrityConstraintViolationException e) {
-        //    System.out.println("이미 존재하는 아이디입니다.");
         }catch (Exception e){
-            e.printStackTrace();
+            if(e.toString().contains("PRIMARY")) {
+                System.out.println("업데이트해야해");
+                insertScore(true);
+            }
+            else{
+                System.out.println("오류가 발생했습니다.");
+                e.printStackTrace();
+            }
         }
     }
 }
