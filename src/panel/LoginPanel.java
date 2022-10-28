@@ -80,16 +80,19 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 
 		if(ob == btn) {
 			try{
+				//TODO: JoinnamePanel Nickname에 값 넣기
 				String url = "jdbc:mysql://localhost:3306/jumprabbit";
 				String userName = "jumprabbit";
 				String password = "jumprabbit";
-				String sql = "select pw from user_information where id='"+inputID+"';";
+				String sql = "select * from user_information where id='"+inputID+"';";
 
 				Connection conn = DriverManager.getConnection(url, userName, password);
 				Statement st = conn.createStatement();
 				ResultSet rs = st.executeQuery(sql);
-				System.out.println(rs);
+
 				rs.next();
+				JoinNamePanel.Nickname = rs.getString("name");
+				System.out.println(JoinNamePanel.Nickname);
 
 				if(inputPW.equals(rs.getString("pw"))){
 					System.out.println("로그인 성공");

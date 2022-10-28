@@ -15,7 +15,8 @@ import java.sql.PreparedStatement;
 public class JoinNamePanel extends JPanel implements ActionListener, KeyListener {
 
 	JLabel labelNotice = new JLabel("닉네임을 입력하세요");
-	static public JTextField textNickname = new JTextField();
+	JTextField textNickname = new JTextField();
+	public static String Nickname = "";
 	ImageIcon howScreen = new ImageIcon("images/screen_join.png");
 
 	JButton btn = new JButton("이동 버튼");
@@ -28,7 +29,7 @@ public class JoinNamePanel extends JPanel implements ActionListener, KeyListener
 		btn.setBounds(0,0,100,100);
 		btn.addActionListener(this);
 
-		//	정의
+		// 정의
 		labelNotice.setBounds(335, 368, 182, 56);
 		textNickname.setBounds(473, 368, 300, 40);
 
@@ -63,11 +64,11 @@ public class JoinNamePanel extends JPanel implements ActionListener, KeyListener
 				Connection conn = DriverManager.getConnection(url, userName, password);
 				PreparedStatement pt = conn.prepareStatement(sql);
 
+				Nickname = textNickname.getText();
 				pt.setString(1, textNickname.getText());
 				pt.setString(2, inputID);
 
 				int r = pt.executeUpdate();
-				System.out.println("바뀐 row: " + r);
 
 				pt.close();
 				conn.close();

@@ -73,7 +73,8 @@ public class GClearPanel extends JPanel implements ActionListener {
                 sql = "INSERT INTO user_score VALUES (?,?)";
                 pstmt = conn.prepareStatement(sql);
 
-                pstmt.setString(1, JoinNamePanel.textNickname.getText());
+                System.out.println("´Ð³×ÀÓ: "+JoinNamePanel.Nickname);
+                pstmt.setString(1, JoinNamePanel.Nickname);
                 pstmt.setInt(2, 450);
 
                 System.out.println("insertµÊ");
@@ -81,8 +82,9 @@ public class GClearPanel extends JPanel implements ActionListener {
                 sql = "update user_score set score=? where name=?;";
                 pstmt = conn.prepareStatement(sql);
 
-                pstmt.setInt(1, 450);
-                pstmt.setString(2, JoinNamePanel.textNickname.getText());
+                System.out.println("´Ð³×ÀÓ: "+JoinNamePanel.Nickname);
+                pstmt.setInt(1, 656);
+                pstmt.setString(2, JoinNamePanel.Nickname);
 
                 System.out.println("updateµÊ");
             }
