@@ -5,7 +5,6 @@ import JumpRabbit.JumpRabbit;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -42,7 +41,13 @@ public class HowPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
 
-		if(ob == btnHowStart)
-			JumpRabbit.setCureentPanel("login");
+		if(ob == btnHowStart){
+			if(!IntroPanel.isLogin){
+				System.out.println("게스트 플레이 물어보기");
+			}
+			else{
+				JumpRabbit.setCurrentPanel("game");
+			}
+		}
 	}
 }

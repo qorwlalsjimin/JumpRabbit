@@ -45,8 +45,8 @@ public class GOverPanel extends JPanel implements ActionListener {
         Object ob = e.getSource();
 
         if(ob == btnRe)
-            JumpRabbit.setCureentPanel("game");
+            JumpRabbit.setCurrentPanel("game");
         else if(ob == btnRank)
-            JumpRabbit.setCureentPanel("rank");
+            JumpRabbit.setCurrentPanel("rank");
     }
 }

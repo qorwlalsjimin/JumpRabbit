@@ -76,7 +76,9 @@ public class JoinNamePanel extends JPanel implements ActionListener, KeyListener
 				exception.printStackTrace();
 			}
 
-			JumpRabbit.setCureentPanel("game");
+			System.out.println("회원가입 성공");
+			IntroPanel.isLogin = true;
+			JumpRabbit.setCurrentPanel("intro");
 		}
 	}
 
@@ -90,7 +92,7 @@ public class JoinNamePanel extends JPanel implements ActionListener, KeyListener
 		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 			//DB에 아이디 유무 판정 필요함
 			System.out.println("엔터");
-			JumpRabbit.setCureentPanel("game");
+			JumpRabbit.setCurrentPanel("game");
 		}
 	}
 

@@ -1,7 +1,6 @@
 package panel;
 
 import JumpRabbit.JumpRabbit;
-import com.sun.xml.internal.bind.v2.model.core.ID;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +15,6 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 	JLabel labelID = new JLabel("ID");
 	JLabel labelPW = new JLabel("PW");
 	JLabel labelJoin = new JLabel("회원가입");
-	JLabel labelGuest = new JLabel("게스트");
 	JTextField textID = new JTextField();
 	JTextField textPW = new JTextField();
 
@@ -34,31 +32,26 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 	    labelID.setBounds(322, 325, 182, 56);
 		labelPW.setBounds(322, 443, 182, 56);
 		labelJoin.setBounds(720,460,200,100);
-		labelGuest.setBounds(620,460,100,100);
 		textID.setBounds(467, 325, 300, 40);
 		textPW.setBounds(467, 443, 300, 40);
 
 		labelID.setFont(new Font("Neo둥근모", 0, 40));
 		labelPW.setFont(new Font("Neo둥근모", 0, 40));
 		labelJoin.setFont(new Font("Neo둥근모", 0, 30));
-		labelGuest.setFont(new Font("Neo둥근모", 0, 30));
 
 		Font font = labelJoin.getFont();
 		Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
 		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
 		labelJoin.setFont(font.deriveFont(attributes));
-		labelGuest.setFont(font.deriveFont(attributes));
 
 	    add(labelID);
 	    add(labelPW);
 		add(labelJoin);
-		add(labelGuest);
 		add(textID);
 		add(textPW);
 		add(btn);
 
 		labelJoin.addMouseListener(this);
-		labelGuest.addMouseListener(this);
 
 		addKeyListener(this);
 		requestFocus();
@@ -66,6 +59,9 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 
 	// 배경 이미지 설정
 	public void paintComponent(Graphics g) {
+		textID.setText("");
+		textPW.setText("");
+
 		g.drawImage(howScreen.getImage(), 0, 0, null);
 		setOpaque(false);
         super.paintComponent(g);
@@ -75,12 +71,13 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
+
 		String inputID = textID.getText();
 		String inputPW = textPW.getText();
 
 		if(ob == btn) {
 			try{
-				//TODO: JoinnamePanel Nickname에 값 넣기
+				//TODO: 로그인 상태 유지
 				String url = "jdbc:mysql://localhost:3306/jumprabbit";
 				String userName = "jumprabbit";
 				String password = "jumprabbit";
@@ -94,9 +91,14 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 				JoinNamePanel.Nickname = rs.getString("name");
 				System.out.println(JoinNamePanel.Nickname);
 
-				if(inputPW.equals(rs.getString("pw"))){
+				if(inputID.isEmpty() && inputPW.isEmpty()){
+					System.out.println("로그인 취소");
+					JumpRabbit.setCurrentPanel("intro");
+				}
+				else if(inputPW.equals(rs.getString("pw"))){
 					System.out.println("로그인 성공");
-					JumpRabbit.setCureentPanel("game");
+					IntroPanel.isLogin = true;
+					JumpRabbit.setCurrentPanel("intro");
 				}
 				else{
 					System.out.println("비밀번호가 틀렸습니다.");
@@ -134,7 +136,7 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 			//DB에 아이디 유무 판정 필요함
 			System.out.println("엔터");
-			JumpRabbit.setCureentPanel("game");
+			JumpRabbit.setCurrentPanel("game");
 		}
 	}
 
@@ -145,9 +147,7 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource().toString().contains("회원가입"))
-			JumpRabbit.setCureentPanel("join");
-		if(e.getSource().toString().contains("게스트"))
-			JumpRabbit.setCureentPanel("game");
+			JumpRabbit.setCurrentPanel("join");
 	}
 
 	@Override

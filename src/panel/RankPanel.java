@@ -5,9 +5,6 @@ import JumpRabbit.JumpRabbit;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -183,6 +180,6 @@ public class RankPanel extends JPanel implements ActionListener {
         Object ob = e.getSource();
 
         if(ob == btnRankBack)
-            JumpRabbit.setCureentPanel("intro");
+            JumpRabbit.setCurrentPanel("intro");
     }
 }

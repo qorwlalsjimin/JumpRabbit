@@ -8,10 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.font.TextAttribute;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
 
 public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 
@@ -82,7 +79,7 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 				conn.close();
 
 				JoinNamePanel.inputID = inputID.toString();
-				JumpRabbit.setCureentPanel("nickname");
+				JumpRabbit.setCurrentPanel("nickname");
 
 			}catch (Exception exception){
 				//중복 id 체크
@@ -104,7 +101,7 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 			//DB에 아이디 유무 판정 필요함
 			System.out.println("엔터");
-			JumpRabbit.setCureentPanel("game");
+			JumpRabbit.setCurrentPanel("game");
 		}
 	}
 

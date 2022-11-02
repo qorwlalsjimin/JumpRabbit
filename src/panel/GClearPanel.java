@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 public class GClearPanel extends JPanel implements ActionListener {
     ImageIcon clearScreen = new ImageIcon("images/screen_gameclear.png");
@@ -53,9 +52,9 @@ public class GClearPanel extends JPanel implements ActionListener {
         Object ob = e.getSource();
 
         if(ob == btnRe)
-            JumpRabbit.setCureentPanel("game");
+            JumpRabbit.setCurrentPanel("game");
         else if(ob == btnRank)
-            JumpRabbit.setCureentPanel("rank");
+            JumpRabbit.setCurrentPanel("rank");
     }
 
     // TODO: table의 name(닉네임) 컬럼 FK로 사용하기
