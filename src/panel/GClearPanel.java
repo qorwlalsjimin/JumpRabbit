@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-
+import JumpRabbit.Main;
 public class GClearPanel extends JPanel implements ActionListener {
     ImageIcon clearScreen = new ImageIcon("images/screen_gameclear.png");
 
@@ -25,7 +25,7 @@ public class GClearPanel extends JPanel implements ActionListener {
         btnRank.setBounds(814, 488, 149, 57);
 
         labelScore.setBounds(465, 373, 200, 45);
-        labelScore.setFont(new Font("NeoµÕ±Ù¸ð",Font.PLAIN, 110));
+        labelScore.setFont(Main.font.deriveFont(64f));
         labelScore.setForeground(Color.decode("#ff42a5"));
 
         //	¹öÆ° À±°û¼±, ¹è°æ»ö ¾ø¾Ö±â

@@ -6,17 +6,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextAttribute;
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import JumpRabbit.Main;
 
 public class LoginPanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 
 	JLabel labelID = new JLabel("ID");
 	JLabel labelPW = new JLabel("PW");
 	JLabel labelJoin = new JLabel("회원가입");
-	JTextField textID = new JTextField();
-	JTextField textPW = new JTextField();
+
+	CustomTextField textID = new CustomTextField();
+	CustomTextField textPW = new CustomTextField();
 
     ImageIcon howScreen = new ImageIcon("images/screen_login.png");
 
@@ -29,20 +33,30 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 		btn.addActionListener(this);
 
     	//	정의
-	    labelID.setBounds(322, 325, 182, 56);
-		labelPW.setBounds(322, 443, 182, 56);
-		labelJoin.setBounds(720,460,200,100);
-		textID.setBounds(467, 325, 300, 40);
-		textPW.setBounds(467, 443, 300, 40);
+	    labelID.setBounds(322, 341, 182, 56);
+		labelPW.setBounds(323, 455, 182, 56);
+		labelJoin.setBounds(720,480,200,100);
+		textID.setBounds(430, 323, 404, 68);
+		textPW.setBounds(430, 433, 404, 68);
 
-		labelID.setFont(new Font("Neo둥근모", 0, 40));
-		labelPW.setFont(new Font("Neo둥근모", 0, 40));
-		labelJoin.setFont(new Font("Neo둥근모", 0, 30));
+		labelID.setFont(Main.font.deriveFont(60f));
+		labelPW.setFont(Main.font.deriveFont(60f));
+		labelJoin.setFont(Main.font.deriveFont(30f));
 
-		Font font = labelJoin.getFont();
-		Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
+		labelID.setForeground(Color.decode("#ff42a5"));
+		labelPW.setForeground(Color.decode("#ff42a5"));
+		labelJoin.setForeground(Color.decode("#ff42a5"));
+
+		Font underlinefont = labelJoin.getFont();
+		Map<TextAttribute, Object> attributes = new HashMap<>(underlinefont.getAttributes());
 		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-		labelJoin.setFont(font.deriveFont(attributes));
+		labelJoin.setFont(underlinefont.deriveFont(attributes));
+
+		textID.setBackgroundImage("images/textfield.png");
+		textPW.setBackgroundImage("images/textfield.png");
+
+		textID.setHint("아이디를 입력하세요.");
+		textPW.setHint("비밀번호를 입력하세요.");
 
 	    add(labelID);
 	    add(labelPW);

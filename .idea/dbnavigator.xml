@@ -79,7 +79,7 @@
           <driver value="" />
           <url-type value="DATABASE" />
           <host value="localhost" />
-          <port value="3307" />
+          <port value="3306" />
           <database value="mysql" />
           <type value="USER_PASSWORD" />
           <user value="jumprabbit" />

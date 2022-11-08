@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import JumpRabbit.Main;
 
 
 public class IntroPanel extends JPanel implements ActionListener, MouseListener {
@@ -18,7 +19,6 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 
 	public static Boolean isLogin = false;
     ImageIcon mainScreen = new ImageIcon("images/screen_main.png");
-
 
     public IntroPanel() {
     	setLayout(null);
@@ -41,7 +41,8 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 	    btnRank.setBorderPainted(false); btnRank.setContentAreaFilled(false);
 
 		// 라벨 글씨 설정
-		labelLogin.setFont(new Font("Neo둥근모",Font.PLAIN, 30));
+		labelLogin.setFont(Main.font.deriveFont(30f));
+		labelLogin.setForeground(Color.decode("#ff42a5"));
 
 	    // 온클릭
 	    btnStart.addActionListener(this);

@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
+import JumpRabbit.Main;
 
 import javax.swing.*;
 
@@ -119,13 +120,12 @@ public class RankPanel extends JPanel implements ActionListener {
 
     private void genRank(String number, int rank, int i) {
         listRank.add(new JLabel((number)));
-        listRank.get(rank-1).setFont(new Font("NeoµÕ±Ù¸ð", Font.PLAIN, 43));
         if(i==0)
             listRank.get(rank-1).setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
         else
             listRank.get(rank-1).setBounds(X_RANK, Y_LABEL + 50 * rank, W_RANK, H_LABEL);
 
-        listRank.get(rank-1).setFont(new Font("Airal",0, 29));
+        listRank.get(rank-1).setFont(Main.font.deriveFont(29f));
         listRank.get(rank-1).setForeground(Color.decode("#ff42a5"));
         add(listRank.get(rank-1));
     }
@@ -133,7 +133,7 @@ public class RankPanel extends JPanel implements ActionListener {
 
     private void genName(int index, int rank, int i) {
         listName.add(new JLabel((String) listScore.get(index)));
-        listName.get(rank-1).setFont(new Font("NeoµÕ±Ù¸ð", Font.PLAIN, 28));
+        listName.get(rank-1).setFont(Main.font.deriveFont(29f));
         listName.get(rank-1).setForeground(Color.decode("#ff42a5"));
 
         if(i==0)
@@ -145,12 +145,12 @@ public class RankPanel extends JPanel implements ActionListener {
 
     private void genScore(int index, int rank, int i) {
         listGrade.add(new JLabel((String) listScore.get(index)));
-        listGrade.get(rank-1).setFont(new Font("NeoµÕ±Ù¸ð", Font.PLAIN, 41));
+        listGrade.get(rank-1).setFont(Main.font.deriveFont(41f));
         if(i==0)
             listGrade.get(rank-1).setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
         else
             listGrade.get(rank-1).setBounds(X_SCORE, Y_LABEL + 50 * rank, W_SCORE, H_LABEL);
-        listGrade.get(rank-1).setFont(new Font("Airal",0, 29));
+        listGrade.get(rank-1).setFont(Main.font.deriveFont(29f));
         listGrade.get(rank-1).setForeground(Color.decode("#ff42a5"));
         add(listGrade.get(rank-1));
     }

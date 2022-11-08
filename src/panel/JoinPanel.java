@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.*;
+import JumpRabbit.Main;
 
 public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 
@@ -32,8 +33,10 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 		textID.setBounds(467, 325, 300, 40);
 		textPW.setBounds(467, 443, 300, 40);
 
-		labelID.setFont(new Font("Neo둥근모", 0, 40));
-		labelPW.setFont(new Font("Neo둥근모", 0, 40));
+		labelID.setFont(Main.font.deriveFont(30f));
+		labelID.setForeground(Color.decode("#ff42a5"));
+		labelPW.setFont(Main.font.deriveFont(30f));
+		labelPW.setForeground(Color.decode("#ff42a5"));
 
 		add(labelID);
 		add(labelPW);
@@ -78,8 +81,13 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 				pt.close();
 				conn.close();
 
-				JoinNamePanel.inputID = inputID.toString();
-				JumpRabbit.setCurrentPanel("nickname");
+				//TODO: 회원가입 예외처리해야됨
+				if(inputID.isEmpty() && inputPW.isEmpty())
+					System.out.println("입력하세요!!!");
+				else{
+					JoinNamePanel.inputID = inputID.toString();
+					JumpRabbit.setCurrentPanel("nickname");
+				}
 
 			}catch (Exception exception){
 				//중복 id 체크

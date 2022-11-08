@@ -44,6 +44,7 @@ public class HowPanel extends JPanel implements ActionListener{
 		if(ob == btnHowStart){
 			if(!IntroPanel.isLogin){
 				System.out.println("게스트 플레이 물어보기");
+				JumpRabbit.setCurrentPanel("guest");
 			}
 			else{
 				JumpRabbit.setCurrentPanel("game");
