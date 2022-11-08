@@ -126,7 +126,7 @@ public class RankPanel extends JPanel implements ActionListener {
             listRank.get(rank-1).setBounds(X_RANK, Y_LABEL + 50 * rank, W_RANK, H_LABEL);
 
         listRank.get(rank-1).setFont(Main.font.deriveFont(29f));
-        listRank.get(rank-1).setForeground(Color.decode("#ff42a5"));
+        listRank.get(rank-1).setForeground(Main.defaultColor);
         add(listRank.get(rank-1));
     }
 
@@ -134,7 +134,7 @@ public class RankPanel extends JPanel implements ActionListener {
     private void genName(int index, int rank, int i) {
         listName.add(new JLabel((String) listScore.get(index)));
         listName.get(rank-1).setFont(Main.font.deriveFont(29f));
-        listName.get(rank-1).setForeground(Color.decode("#ff42a5"));
+        listName.get(rank-1).setForeground(Main.defaultColor);
 
         if(i==0)
             listName.get(rank-1).setBounds(X_RANK, Y_LABEL, W_RANK, H_LABEL);
@@ -151,7 +151,7 @@ public class RankPanel extends JPanel implements ActionListener {
         else
             listGrade.get(rank-1).setBounds(X_SCORE, Y_LABEL + 50 * rank, W_SCORE, H_LABEL);
         listGrade.get(rank-1).setFont(Main.font.deriveFont(29f));
-        listGrade.get(rank-1).setForeground(Color.decode("#ff42a5"));
+        listGrade.get(rank-1).setForeground(Main.defaultColor);
         add(listGrade.get(rank-1));
     }
 

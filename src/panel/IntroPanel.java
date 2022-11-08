@@ -42,7 +42,7 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 
 		// 라벨 글씨 설정
 		labelLogin.setFont(Main.font.deriveFont(30f));
-		labelLogin.setForeground(Color.decode("#ff42a5"));
+		labelLogin.setForeground(Main.defaultColor);
 
 	    // 온클릭
 	    btnStart.addActionListener(this);

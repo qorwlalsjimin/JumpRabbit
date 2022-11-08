@@ -26,7 +26,7 @@ public class GClearPanel extends JPanel implements ActionListener {
 
         labelScore.setBounds(465, 373, 200, 45);
         labelScore.setFont(Main.font.deriveFont(64f));
-        labelScore.setForeground(Color.decode("#ff42a5"));
+        labelScore.setForeground(Main.defaultColor);
 
         //	버튼 윤곽선, 배경색 없애기
         btnRe.setBorderPainted(false); btnRe.setContentAreaFilled(false);

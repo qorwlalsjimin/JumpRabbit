@@ -15,28 +15,44 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 
 	JLabel labelID = new JLabel("ID");
 	JLabel labelPW = new JLabel("PW");
-	JTextField textID = new JTextField();
-	JTextField textPW = new JTextField();
+	CustomTextField textID = new CustomTextField();
+	CustomTextField textPW = new CustomTextField();
     ImageIcon howScreen = new ImageIcon("images/screen_login.png");
-
+	static JButton btnRankBack = new JButton(new ImageIcon("images/icon_rank_back.png"));
 	JButton btn = new JButton("이동 버튼");
 
     public JoinPanel() {
     	setLayout(null);
 
+		//TODO: 로그아웃 후에 남아있는 textfield 값 지우기
+		//TODO: 디자인 크기대로 label, textfield 위치 조정하기
+
+		// 뒤로 돌아가기 버튼
+		btnRankBack.setBounds(1070, 700, 102, 64);
+		btnRankBack.setBorderPainted(false); btnRankBack.setContentAreaFilled(false);
+		add(btnRankBack);
+		btnRankBack.addActionListener(this);
+
 		btn.setBounds(0,0,100,100);
 		btn.addActionListener(this);
 
     	//	정의
-		labelID.setBounds(322, 325, 182, 56);
-		labelPW.setBounds(322, 443, 182, 56);
-		textID.setBounds(467, 325, 300, 40);
-		textPW.setBounds(467, 443, 300, 40);
+		labelID.setBounds(322, 341, 182, 56);
+		labelPW.setBounds(323, 455, 182, 56);
+		textID.setBounds(430, 323, 404, 68);
+		textPW.setBounds(430, 433, 404, 68);
 
-		labelID.setFont(Main.font.deriveFont(30f));
-		labelID.setForeground(Color.decode("#ff42a5"));
-		labelPW.setFont(Main.font.deriveFont(30f));
-		labelPW.setForeground(Color.decode("#ff42a5"));
+		labelID.setFont(Main.font.deriveFont(60f));
+		labelPW.setFont(Main.font.deriveFont(60f));
+
+		labelPW.setForeground(Main.defaultColor);
+		labelID.setForeground(Main.defaultColor);
+
+		textID.setHint("아이디를 입력하세요.");
+		textPW.setHint("비밀번호를 입력하세요.");
+
+		textID.setBackgroundImage("images/textfield.png");
+		textPW.setBackgroundImage("images/textfield.png");
 
 		add(labelID);
 		add(labelPW);
@@ -96,7 +112,17 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 				else
 					System.out.println("오류가 발생했습니다.");
 			}
+		}else if(ob == btnRankBack){
+			JumpRabbit.setCurrentPanel("intro");
+			setBlank();
 		}
+	}
+
+	public void setBlank(){
+		textID.setText("");
+		textPW.setText("");
+		textID.setHint("아이디를 입력하세요.");
+		textPW.setHint("비밀번호를 입력하세요.");
 	}
 
 	@Override

@@ -11,29 +11,41 @@ import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import JumpRabbit.Main;
 
 public class JoinNamePanel extends JPanel implements ActionListener, KeyListener {
 
-	JLabel labelNotice = new JLabel("닉네임을 입력하세요");
-	JTextField textNickname = new JTextField();
+	JLabel labelNotice = new JLabel("NAME");
+	CustomTextField textNickname = new CustomTextField();
 	public static String Nickname = "";
 	ImageIcon howScreen = new ImageIcon("images/screen_join.png");
-
+	static JButton btnRankBack = new JButton(new ImageIcon("images/icon_rank_back.png"));
 	JButton btn = new JButton("이동 버튼");
 
 	static public String inputID;
 
 	public JoinNamePanel() {
 		setLayout(null);
+		//TODO: 회원가입 중 돌아가기 기능, 닉네임 없는 계정은 자동 삭제
+
+		// 뒤로 돌아가기 버튼
+		btnRankBack.setBounds(1070, 700, 102, 64);
+		btnRankBack.setBorderPainted(false); btnRankBack.setContentAreaFilled(false);
+		add(btnRankBack);
+		btnRankBack.addActionListener(this);
 
 		btn.setBounds(0,0,100,100);
 		btn.addActionListener(this);
 
 		// 정의
-		labelNotice.setBounds(335, 368, 182, 56);
-		textNickname.setBounds(473, 368, 300, 40);
+		labelNotice.setBounds(335, 370, 182, 56);
+		textNickname.setBounds(473, 368, 404, 68);
 
-		labelNotice.setFont(new Font("Neo둥근모", 0, 40));
+		labelNotice.setFont(Main.font.deriveFont(60f));
+		labelNotice.setForeground(Main.defaultColor);
+
+		textNickname.setHint("Write your name");
+		textNickname.setBackgroundImage("images/textfield.png");
 
 		add(labelNotice);
 		add(textNickname);
@@ -79,6 +91,8 @@ public class JoinNamePanel extends JPanel implements ActionListener, KeyListener
 			System.out.println("회원가입 성공");
 			IntroPanel.isLogin = true;
 			JumpRabbit.setCurrentPanel("intro");
+		}else if(ob == btnRankBack){
+			JumpRabbit.setCurrentPanel("login");
 		}
 	}
 

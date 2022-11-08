@@ -10,6 +10,7 @@ import java.sql.SQLException;
 public class Main {
     public static final int SCREEN_WIDTH = 1200;
     public static final int SCREEN_HEIGHT = 850;
+    public static final Color defaultColor = Color.decode("#ff42a5");
 
     public static Font font;
 

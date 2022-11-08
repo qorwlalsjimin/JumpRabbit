@@ -18,6 +18,8 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 	JLabel labelID = new JLabel("ID");
 	JLabel labelPW = new JLabel("PW");
 	JLabel labelJoin = new JLabel("회원가입");
+	static JButton btnRankBack = new JButton(new ImageIcon("images/icon_rank_back.png"));
+
 
 	CustomTextField textID = new CustomTextField();
 	CustomTextField textPW = new CustomTextField();
@@ -28,6 +30,12 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
     
     public LoginPanel() {
     	setLayout(null);
+
+		// 뒤로 돌아가기 버튼
+		btnRankBack.setBounds(1070, 700, 102, 64);
+		btnRankBack.setBorderPainted(false); btnRankBack.setContentAreaFilled(false);
+		add(btnRankBack);
+		btnRankBack.addActionListener(this);
 
 		btn.setBounds(0,0,100,100);
 		btn.addActionListener(this);
@@ -43,20 +51,20 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 		labelPW.setFont(Main.font.deriveFont(60f));
 		labelJoin.setFont(Main.font.deriveFont(30f));
 
-		labelID.setForeground(Color.decode("#ff42a5"));
-		labelPW.setForeground(Color.decode("#ff42a5"));
-		labelJoin.setForeground(Color.decode("#ff42a5"));
+		labelID.setForeground(Main.defaultColor);
+		labelPW.setForeground(Main.defaultColor);
+		labelJoin.setForeground(Main.defaultColor);
 
 		Font underlinefont = labelJoin.getFont();
 		Map<TextAttribute, Object> attributes = new HashMap<>(underlinefont.getAttributes());
 		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
 		labelJoin.setFont(underlinefont.deriveFont(attributes));
 
-		textID.setBackgroundImage("images/textfield.png");
-		textPW.setBackgroundImage("images/textfield.png");
-
 		textID.setHint("아이디를 입력하세요.");
 		textPW.setHint("비밀번호를 입력하세요.");
+
+		textID.setBackgroundImage("images/textfield.png");
+		textPW.setBackgroundImage("images/textfield.png");
 
 	    add(labelID);
 	    add(labelPW);
@@ -73,13 +81,20 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 
 	// 배경 이미지 설정
 	public void paintComponent(Graphics g) {
-		textID.setText("");
-		textPW.setText("");
+//		textID.setText("");
+//		textPW.setText("");
 
 		g.drawImage(howScreen.getImage(), 0, 0, null);
 		setOpaque(false);
         super.paintComponent(g);
     }
+
+	public void setBlank(){
+		textID.setText("");
+		textPW.setText("");
+		textID.setHint("아이디를 입력하세요.");
+		textPW.setHint("비밀번호를 입력하세요.");
+	}
 
 	//버튼 클릭 리스너
 	@Override
@@ -124,10 +139,10 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 				conn.close();
 			}catch (Exception exception){
 				if (textID.getText().isEmpty()){
-					System.out.println("아이디를 입력해주세요.");
+					System.out.println("please id");
 				}
 				else if (textPW.getText().isEmpty()){
-					System.out.println("비밀번호를 입력해주세요.");
+					System.out.println("please password");
 				}
 				else if(exception.toString().contains("Illegal operation on empty result set.")){
 					System.out.println("해당하는 아이디가 없습니다.");
@@ -136,6 +151,9 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 				}
 				else exception.printStackTrace();
 			}
+		}else if(ob == btnRankBack){
+			JumpRabbit.setCurrentPanel("intro");
+			setBlank();
 		}
 	}
 

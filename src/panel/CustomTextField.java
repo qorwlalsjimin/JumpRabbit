@@ -1,20 +1,30 @@
 package panel;
 
+import JumpRabbit.JumpRabbit;
+
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import JumpRabbit.Main;
 
 public class CustomTextField extends JTextField {
     private static final long serialVersionUID = 1L;
-    private static final Font focusGainFont = new Font("Courier New", Font.PLAIN, 12);
-    private static final Font focusLostFont = new Font("Courier New", Font.ITALIC, 12);
     private Image img;
     private CustomTextField hintTextField;
 
     public CustomTextField() {
         hintTextField = this;
+        setBorder(new EmptyBorder(20, 20, 10, 3));
     }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.drawImage(img, 0, 0, this);
+    }
+
 
     @Override
     public void paintComponent(Graphics g) {
@@ -30,19 +40,11 @@ public class CustomTextField extends JTextField {
     public void setBackgroundImage(String imPath){
         img = new ImageIcon(imPath).getImage();
         setOpaque(false);
-        new JComponent(){
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public void paintComponent(Graphics g) {
-                super.paintComponent(g);
-            }
-        };
     }
 
     public void setHint(String hint){
         hintTextField.setText(hint);
-        hintTextField.setFont(focusLostFont);
+        hintTextField.setFont(Main.font.deriveFont(20f));
         hintTextField.setForeground(Color.GRAY);
         hintTextField.addFocusListener(new FocusAdapter() {
 
@@ -54,19 +56,19 @@ public class CustomTextField extends JTextField {
                 } else {
                     hintTextField.setText(getText());
                 }
-                hintTextField.setFont(focusGainFont);
-                hintTextField.setForeground(Color.BLACK);
+                hintTextField.setFont(Main.font.deriveFont(20f));
+                hintTextField.setForeground(Color.blue);
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if ( hintTextField.getText().equals(hint) || getText().length() == 0) {
                     hintTextField.setText(hint);
-                    hintTextField.setFont(focusLostFont);
+                    hintTextField.setFont(Main.font.deriveFont(20f));
                     hintTextField.setForeground(Color.GRAY);
                 } else {
                     hintTextField.setText(getText());
-                    hintTextField.setFont(focusGainFont);
+                    hintTextField.setFont(Main.font.deriveFont(20f));
                     hintTextField.setForeground(Color.BLACK);
                 }
             }
