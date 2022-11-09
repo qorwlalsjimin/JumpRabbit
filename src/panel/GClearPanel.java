@@ -2,6 +2,7 @@ package panel;
 
 import JumpRabbit.JumpRabbit;
 import JumpRabbit.Main;
+import dialog.ConfirmDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -97,7 +98,7 @@ public class GClearPanel extends JPanel implements ActionListener {
                 insertScore(true);
             }
             else{
-                System.out.println("오류가 발생했습니다.");
+                new ConfirmDialog("오류가 발생했습니다.");
                 e.printStackTrace();
             }
         }

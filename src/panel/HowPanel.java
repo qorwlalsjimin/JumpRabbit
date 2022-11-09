@@ -1,6 +1,7 @@
 package panel;
 
 import JumpRabbit.JumpRabbit;
+import dialog.GuestDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,8 +41,7 @@ public class HowPanel extends JPanel implements ActionListener{
 
 		if(ob == btnHowStart){
 			if(!IntroPanel.isLogin){
-				System.out.println("게스트 플레이 물어보기");
-				JumpRabbit.setCurrentPanel("guest");
+				new GuestDialog();
 			}
 			else{
 				JumpRabbit.setCurrentPanel("game");

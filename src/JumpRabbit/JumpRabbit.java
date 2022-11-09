@@ -23,8 +23,9 @@ public class JumpRabbit extends JFrame {
 	LoginPanel pLogin = new LoginPanel();
 	JoinPanel pJoin = new JoinPanel();
 	JoinNamePanel pJoinName = new JoinNamePanel();
-	GuestPanel pGuest = new GuestPanel();
-	LogoutPanel pLogout = new LogoutPanel();
+
+	//폰트
+	Font font;
 
     //게임 화면 설정
     public JumpRabbit(){
@@ -44,8 +45,6 @@ public class JumpRabbit extends JFrame {
 		panel.add("login",pLogin);
 		panel.add("join",pJoin);
 		panel.add("nickname", pJoinName);
-		panel.add("guest",pGuest);
-		panel.add("logout",pLogout);
 
 		card.show(panel, "intro"); // 실행하자 마자 보이는
 
@@ -109,14 +108,7 @@ public class JumpRabbit extends JFrame {
 			case "nickname":
 				card.show(panel, "nickname");
 				break;
-
-			case "guest":
-				card.show(panel, "guest");
-				break;
-
-			case "logout":
-				card.show(panel, "logout");
-				break;
 		}
 	}
+
 }

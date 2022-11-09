@@ -1,7 +1,5 @@
 package JumpRabbit;
 
-import panel.ScoreDB;
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -28,4 +26,5 @@ public class Main {
 
         new JumpRabbit();
     }
+
 }

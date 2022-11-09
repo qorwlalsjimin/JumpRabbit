@@ -2,6 +2,7 @@ package panel;
 
 import JumpRabbit.JumpRabbit;
 import JumpRabbit.Main;
+import dialog.ConfirmDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,6 +53,7 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 		labelPW.setForeground(Main.defaultColor);
 		labelJoin.setForeground(Main.defaultColor);
 
+		// 회원가입 밑줄
 		Font underlinefont = labelJoin.getFont();
 		Map<TextAttribute, Object> attributes = new HashMap<>(underlinefont.getAttributes());
 		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
@@ -141,29 +143,29 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 					JumpRabbit.setCurrentPanel("intro");
 				}
 				else{
-					System.out.println("비밀번호가 틀렸습니다.");
+					new ConfirmDialog("비밀번호가 틀렸습니다.");
 					textPW.setText("");
 				}
 
 				st.close();
 				rs.close();
 				conn.close();
+
 			}catch (Exception exception){
 				if (textID.getText().isEmpty()){
-					System.out.println("please id");
+					new ConfirmDialog("아이디를 입력해주세요");
 				}
 				else if (textPW.getText().isEmpty()){
-					System.out.println("please password");
+					new ConfirmDialog("비밀번호를 입력해주세요");
 				}
 				else if(exception.toString().contains("Illegal operation on empty result set.")){
-					System.out.println("해당하는 아이디가 없습니다.");
+					new ConfirmDialog("해당하는 아이디가 없습니다");
 					textID.setText("");
 					textPW.setText("");
 				}
 				else exception.printStackTrace();
 			}
 
-			JumpRabbit.setCurrentPanel("game");
 		}
 	}
 

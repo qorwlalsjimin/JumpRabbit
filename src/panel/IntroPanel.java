@@ -2,6 +2,8 @@ package panel;
 
 import JumpRabbit.JumpRabbit;
 import JumpRabbit.Main;
+import dialog.LogoutDialog;
+import dialog.GuestDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.font.TextAttribute;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class IntroPanel extends JPanel implements ActionListener, MouseListener {
@@ -18,6 +23,7 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
     static JButton btnHow;
     static JButton btnRank;
 	JLabel labelLogin;
+	JLabel labelName;
 
 	public static Boolean isLogin = false;
     ImageIcon mainScreen = new ImageIcon("images/screen_main.png");
@@ -29,13 +35,15 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
     	btnStart = new JButton(new ImageIcon("images/icon_start.png"));
     	btnHow = new JButton(new ImageIcon("images/icon_how.png"));
     	btnRank = new JButton(new ImageIcon("images/icon_rank.png"));
-		labelLogin = new JLabel("로그인");
+		labelLogin = new JLabel("LOGIN");
+		labelName = new JLabel("배요미");
     			
 	    //	버튼 위치 지정
 	    btnStart.setBounds(183, 614, 198, 61);
 	    btnHow.setBounds(554, 614, 124, 61);
 	    btnRank.setBounds(867, 614, 162, 61);
-		labelLogin.setBounds(1070, 10, 150,50);
+		labelLogin.setBounds(1080, 10, 150,50);
+		labelName.setBounds(1000, 10, 150, 50);
 	    
 	    //	버튼 윤곽선, 배경색 없애기
 	    btnStart.setBorderPainted(false); btnStart.setContentAreaFilled(false);
@@ -44,12 +52,29 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 
 		// 라벨 글씨 설정
 		labelLogin.setFont(Main.font.deriveFont(30f));
+		labelName.setFont(Main.font.deriveFont(30f));
+
 		labelLogin.setForeground(Main.defaultColor);
+		labelName.setForeground(Main.defaultColor);
+
+
+		// 텍스트 테두리
+		// TODO : 마우스 entered하면 색 바뀌는 효과
+
+		// 닉네임 라벨 밑줄
+		Font underlinefont = labelName.getFont();
+		Map<TextAttribute, Object> attributes = new HashMap<>(underlinefont.getAttributes());
+		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		labelName.setFont(underlinefont.deriveFont(attributes));
 
 	    // 온클릭
 	    btnStart.addActionListener(this);
 	    btnHow.addActionListener(this);
 	    btnRank.addActionListener(this);
+
+	    btnStart.addMouseListener(this);
+	    btnHow.addMouseListener(this);
+	    btnRank.addMouseListener(this);
 		labelLogin.addMouseListener(this);
 
 	    //	패널에 버튼 추가
@@ -61,8 +86,16 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 
 	// 배경 이미지 설정
 	public void paintComponent(Graphics g) {
-		if(isLogin) labelLogin.setText("로그아웃");
-		else labelLogin.setText("로그인");
+		if(isLogin) {
+			labelLogin.setText("LOGOUT");
+//			labelLogin.setText("배요미" + "님 LOGOUT");
+			labelLogin.setBounds(1070, 10, 550,50);
+			//add(labelName);
+		}
+		else {
+			labelLogin.setText("LOGIN");
+			labelLogin.setBounds(1080, 10, 150,50);
+		}
 
 		g.drawImage(mainScreen.getImage(), 0, 0, null);
 		setOpaque(false);
@@ -75,7 +108,7 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 
 		if(ob == btnStart){
 			if(!isLogin){
-				JumpRabbit.setCurrentPanel("guest");
+				new GuestDialog();
 			}
 			else{
 				JumpRabbit.setCurrentPanel("game");
@@ -92,11 +125,10 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 	// MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(e.getSource().toString().contains("로그인"))
+		if(e.getSource().toString().contains("LOGIN"))
 			JumpRabbit.setCurrentPanel("login");
-		else{
-			System.out.println("로그아웃하실텨?");
-			JumpRabbit.setCurrentPanel("logout");
+		else if(e.getSource().toString().contains("LOGOUT")){
+			new LogoutDialog();
 		}
 	}
 
@@ -117,6 +149,20 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+		if(e.getSource().toString().contains("LOGIN")){
 
+		}
+
+		else if(e.getSource().toString().contains("icon_start")){
+			System.out.println("시작?");
+
+		}else if(e.getSource().toString().contains("icon_how")){
+			System.out.println("방법?");
+
+		}else if(e.getSource().toString().contains("icon_rank")){
+			System.out.println("랭킹?");
+		}
 	}
+
+
 }

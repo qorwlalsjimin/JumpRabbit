@@ -1,5 +1,6 @@
 package panel;
 
+import dialog.ConfirmDialog;
 import JumpRabbit.JumpRabbit;
 import JumpRabbit.Main;
 
@@ -117,21 +118,20 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 
 				//TODO: 회원가입 예외처리해야됨
 				if(inputID.isEmpty() && inputPW.isEmpty())
-					System.out.println("입력하세요!!!");
+					new ConfirmDialog("빈칸을 입력해주세요.");
 				else{
 					JoinNamePanel.inputID = inputID.toString();
 					JumpRabbit.setCurrentPanel("nickname");
 				}
 
+				JumpRabbit.setCurrentPanel("nickname");
 			}catch (Exception exception){
 				//중복 id 체크
 				if(exception.toString().contains("PRIMARY"))
-					System.out.println("이미 존재하는 아이디입니다.");
+					new ConfirmDialog("이미 존재하는 아이디입니다.");
 				else
-					System.out.println("오류가 발생했습니다.");
+					new ConfirmDialog("알 수 없는 오류가 발생했습니다.");
 			}
-
-			JumpRabbit.setCurrentPanel("nickname");
 		}
 	}
 
