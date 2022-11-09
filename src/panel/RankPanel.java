@@ -1,7 +1,9 @@
 package panel;
 
 import JumpRabbit.JumpRabbit;
+import JumpRabbit.Main;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,9 +13,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
-import JumpRabbit.Main;
-
-import javax.swing.*;
 
 public class RankPanel extends JPanel implements ActionListener {
     final int X_RANK = 380;

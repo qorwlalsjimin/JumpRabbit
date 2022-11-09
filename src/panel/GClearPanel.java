@@ -1,6 +1,7 @@
 package panel;
 
 import JumpRabbit.JumpRabbit;
+import JumpRabbit.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import JumpRabbit.Main;
 public class GClearPanel extends JPanel implements ActionListener {
     ImageIcon clearScreen = new ImageIcon("images/screen_gameclear.png");
 

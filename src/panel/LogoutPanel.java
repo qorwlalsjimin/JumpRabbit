@@ -1,7 +1,6 @@
 package panel;
 
 import JumpRabbit.JumpRabbit;
-import com.mysql.cj.log.Log;
 
 import javax.swing.*;
 import java.awt.*;

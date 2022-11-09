@@ -1,17 +1,18 @@
 package panel;
 
 import JumpRabbit.JumpRabbit;
+import JumpRabbit.Main;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextAttribute;
-import java.io.File;
-import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-import JumpRabbit.Main;
 
 public class LoginPanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 

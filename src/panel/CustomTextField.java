@@ -1,13 +1,12 @@
 package panel;
 
-import JumpRabbit.JumpRabbit;
+import JumpRabbit.Main;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import JumpRabbit.Main;
 
 public class CustomTextField extends JTextField {
     private static final long serialVersionUID = 1L;

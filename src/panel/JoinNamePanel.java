@@ -1,6 +1,7 @@
 package panel;
 
 import JumpRabbit.JumpRabbit;
+import JumpRabbit.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +12,6 @@ import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import JumpRabbit.Main;
 
 public class JoinNamePanel extends JPanel implements ActionListener, KeyListener {
 
