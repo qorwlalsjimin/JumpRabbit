@@ -117,8 +117,6 @@ public class JumpRabbit extends JFrame {
 			case "logout":
 				card.show(panel, "logout");
 				break;
-
-
 		}
 	}
 }
