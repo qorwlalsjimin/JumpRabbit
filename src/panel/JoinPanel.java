@@ -18,8 +18,8 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 
 	JLabel labelID = new JLabel("ID");
 	JLabel labelPW = new JLabel("PW");
-	CustomTextField textID = new CustomTextField();
-	CustomTextField textPW = new CustomTextField();
+	public static CustomTextField textID = new CustomTextField();
+	public static CustomTextField textPW = new CustomTextField();
     ImageIcon howScreen = new ImageIcon("images/screen_login.png");
 	static JButton btnRankBack = new JButton(new ImageIcon("images/icon_rank_back.png"));
 
@@ -82,7 +82,7 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 		}
 	}
 
-	public void setBlank(){
+	public static void setBlank(){
 		textID.setText("");
 		textPW.setText("");
 		textID.setHint("아이디를 입력하세요.");

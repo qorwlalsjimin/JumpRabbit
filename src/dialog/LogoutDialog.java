@@ -3,6 +3,8 @@ package dialog;
 import JumpRabbit.Main;
 import panel.IntroPanel;
 import panel.JoinNamePanel;
+import panel.JoinPanel;
+import panel.LoginPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +20,7 @@ public class LogoutDialog {
     public LogoutDialog() {
 
         JLabel displayText = new JLabel("! 로그아웃하시겠습니까?");
-        displayText.setFont(Main.font.deriveFont(30f));
+        displayText.setFont(Main.font.deriveFont(20f));
         displayText.setForeground(Color.white);
         displayText.setHorizontalAlignment(JLabel.CENTER);
         displayText.setVerticalTextPosition(SwingConstants.CENTER);
@@ -59,8 +61,11 @@ public class LogoutDialog {
             Object ob = e.getSource();
             frame.setVisible(false);
 
-            if(ob == btnYes)
+            if(ob == btnYes){
                 IntroPanel.isLogin = false;
+                LoginPanel.setBlank();
+                JoinPanel.setBlank();
+            }
             else if(ob == btnNo){}
         }
     };

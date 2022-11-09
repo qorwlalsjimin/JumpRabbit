@@ -23,8 +23,8 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 	static JButton btnRankBack = new JButton(new ImageIcon("images/icon_rank_back.png"));
 
 
-	CustomTextField textID = new CustomTextField();
-	CustomTextField textPW = new CustomTextField();
+	public static CustomTextField textID = new CustomTextField();
+	public static CustomTextField textPW = new CustomTextField();
 
     ImageIcon howScreen = new ImageIcon("images/screen_login.png");
 
@@ -81,15 +81,13 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 
 	// 배경 이미지 설정
 	public void paintComponent(Graphics g) {
-//		textID.setText("");
-//		textPW.setText("");
 
 		g.drawImage(howScreen.getImage(), 0, 0, null);
 		setOpaque(false);
         super.paintComponent(g);
     }
 
-	public void setBlank(){
+	public static void setBlank(){
 		textID.setText("");
 		textPW.setText("");
 		textID.setHint("아이디를 입력하세요.");
