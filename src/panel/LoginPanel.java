@@ -27,7 +27,6 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 
     ImageIcon howScreen = new ImageIcon("images/screen_login.png");
 
-	JButton btn = new JButton("이동 버튼");
     
     public LoginPanel() {
     	setLayout(null);
@@ -37,9 +36,6 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 		btnRankBack.setBorderPainted(false); btnRankBack.setContentAreaFilled(false);
 		add(btnRankBack);
 		btnRankBack.addActionListener(this);
-
-		btn.setBounds(0,0,100,100);
-		btn.addActionListener(this);
 
     	//	정의
 	    labelID.setBounds(322, 341, 182, 56);
@@ -72,9 +68,10 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 		add(labelJoin);
 		add(textID);
 		add(textPW);
-		add(btn);
 
 		labelJoin.addMouseListener(this);
+		textID.addKeyListener(this);
+		textPW.addKeyListener(this);
 
 		addKeyListener(this);
 		requestFocus();
@@ -102,10 +99,23 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
 
-		String inputID = textID.getText();
-		String inputPW = textPW.getText();
+		if(ob == btnRankBack){
+			JumpRabbit.setCurrentPanel("intro");
+			setBlank();
+		}
+	}
 
-		if(ob == btn) {
+	//키보드 리스너
+	@Override
+	public void keyTyped(KeyEvent e) {}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		//엔터 입력시 화면 이동
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+			String inputID = textID.getText();
+			String inputPW = textPW.getText();
+
 			try{
 				//TODO: 로그인 상태 유지
 				String url = "jdbc:mysql://localhost:3306/jumprabbit";
@@ -152,23 +162,7 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 				}
 				else exception.printStackTrace();
 			}
-		}else if(ob == btnRankBack){
-			JumpRabbit.setCurrentPanel("intro");
-			setBlank();
-		}
-	}
 
-	//키보드 리스너
-	@Override
-	public void keyTyped(KeyEvent e) {}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		//엔터 입력시 화면 이동
-		System.out.println("리스너 실행");
-		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-			//DB에 아이디 유무 판정 필요함
-			System.out.println("엔터");
 			JumpRabbit.setCurrentPanel("game");
 		}
 	}
