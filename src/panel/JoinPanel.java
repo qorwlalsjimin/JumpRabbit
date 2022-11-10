@@ -85,8 +85,10 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 	public static void setBlank(){
 		textID.setText("");
 		textPW.setText("");
+		JoinNamePanel.textNickname.setText("");
 		textID.setHint("아이디를 입력하세요.");
 		textPW.setHint("비밀번호를 입력하세요.");
+		JoinNamePanel.textNickname.setHint("닉네임을 입력하세요.");
 	}
 
 	@Override
@@ -99,7 +101,7 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 
 		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 			try{
-
+				//TODO: 비밀번호 입력 안 해도 넘어감
 				String url = "jdbc:mysql://localhost:3306/jumprabbit";
 				String userName = "jumprabbit";
 				String password = "jumprabbit";
@@ -127,8 +129,10 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 				JumpRabbit.setCurrentPanel("nickname");
 			}catch (Exception exception){
 				//중복 id 체크
-				if(exception.toString().contains("PRIMARY"))
+				if(exception.toString().contains("PRIMARY")){
 					new ConfirmDialog("이미 존재하는 아이디입니다.");
+					textID.setText("");
+				}
 				else
 					new ConfirmDialog("알 수 없는 오류가 발생했습니다.");
 			}

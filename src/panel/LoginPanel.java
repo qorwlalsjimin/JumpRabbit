@@ -125,15 +125,18 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 
 				Connection conn = DriverManager.getConnection(url, userName, password);
 				Statement st = conn.createStatement();
-				ResultSet rs = st.executeQuery(sql);
 
-				rs.next();
-				JoinNamePanel.Nickname = rs.getString("name");
-				System.out.println(JoinNamePanel.Nickname);
+				ResultSet rs = null;
+				if(!textID.getText().equals("아이디를 입력하세요.")){
+					rs = st.executeQuery(sql);
+					rs.next();
+					JoinNamePanel.Nickname = rs.getString("name");
+					System.out.println(JoinNamePanel.Nickname);
+				}else
+					new ConfirmDialog("빈칸을 입력해주세요");
 
-				if(inputID.isEmpty() && inputPW.isEmpty()){
-					System.out.println("로그인 취소");
-					JumpRabbit.setCurrentPanel("intro");
+				if(textID.getText().equals("아이디를 입력하세요.") || textPW.getText().equals("비밀번호를 입력하세요.")){
+					new ConfirmDialog("빈칸을 입력해주세요");
 				}
 				else if(inputPW.equals(rs.getString("pw"))){
 					System.out.println("로그인 성공");
@@ -146,20 +149,13 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 				}
 
 				st.close();
-				rs.close();
+				if(rs!=null) rs.close();
 				conn.close();
 
 			}catch (Exception exception){
-				if (textID.getText().isEmpty()){
-					new ConfirmDialog("아이디를 입력해주세요");
-				}
-				else if (textPW.getText().isEmpty()){
-					new ConfirmDialog("비밀번호를 입력해주세요");
-				}
-				else if(exception.toString().contains("Illegal operation on empty result set.")){
+				if(exception.toString().contains("Illegal operation on empty result set.")){
 					new ConfirmDialog("해당하는 아이디가 없습니다");
-					textID.setText("");
-					textPW.setText("");
+					setBlank();
 				}
 				else exception.printStackTrace();
 			}

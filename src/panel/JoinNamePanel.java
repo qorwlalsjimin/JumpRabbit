@@ -16,7 +16,7 @@ import java.sql.PreparedStatement;
 public class JoinNamePanel extends JPanel implements ActionListener, KeyListener {
 
 	JLabel labelNotice = new JLabel("NAME");
-	CustomTextField textNickname = new CustomTextField();
+	public static CustomTextField textNickname = new CustomTextField();
 	public static String Nickname = "";
 	ImageIcon howScreen = new ImageIcon("images/screen_join.png");
 	static JButton btnRankBack = new JButton(new ImageIcon("images/icon_rank_back.png"));
@@ -40,7 +40,7 @@ public class JoinNamePanel extends JPanel implements ActionListener, KeyListener
 		labelNotice.setFont(Main.font.deriveFont(60f));
 		labelNotice.setForeground(Main.defaultColor);
 
-		textNickname.setHint("Write your name");
+		textNickname.setHint("닉네임을 입력하세요");
 		textNickname.setBackgroundImage("images/textfield.png");
 
 		add(labelNotice);
