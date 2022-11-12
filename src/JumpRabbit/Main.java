@@ -3,7 +3,7 @@ package JumpRabbit;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Main {
     public static final int SCREEN_WIDTH = 1200;
@@ -25,6 +25,7 @@ public class Main {
         }
 
         new JumpRabbit();
+
     }
 
 }

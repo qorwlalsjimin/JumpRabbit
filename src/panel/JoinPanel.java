@@ -101,6 +101,11 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 
 		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 			try{
+				//SQLite
+//				Class.forName("org.sqlite.JDBC");
+//				String dbFile = "src/JumpRabbitDB.db";
+//				Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+
 				//TODO: 비밀번호 입력 안 해도 넘어감
 				String url = "jdbc:mysql://localhost:3306/jumprabbit";
 				String userName = "jumprabbit";
@@ -133,8 +138,10 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 					new ConfirmDialog("이미 존재하는 아이디입니다.");
 					textID.setText("");
 				}
-				else
+				else{
 					new ConfirmDialog("알 수 없는 오류가 발생했습니다.");
+					exception.printStackTrace();
+				}
 			}
 		}
 	}

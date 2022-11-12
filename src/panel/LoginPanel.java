@@ -117,12 +117,16 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 			String inputPW = textPW.getText();
 
 			try{
+				//SQLite
+//				Class.forName("org.sqlite.JDBC");
+//				String dbFile = "src/JumpRabbitDB.db";
+//				Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+
 				//TODO: 로그인 상태 유지
 				String url = "jdbc:mysql://localhost:3306/jumprabbit";
 				String userName = "jumprabbit";
 				String password = "jumprabbit";
 				String sql = "select * from user_information where id='"+inputID+"';";
-
 				Connection conn = DriverManager.getConnection(url, userName, password);
 				Statement st = conn.createStatement();
 
