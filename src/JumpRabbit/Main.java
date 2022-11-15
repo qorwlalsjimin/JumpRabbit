@@ -14,6 +14,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
+        // ÆùÆ®
         try{
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/neodgm.ttf"));
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -23,6 +24,7 @@ public class Main {
         } catch (FontFormatException e) {
             throw new RuntimeException(e);
         }
+
 
         new JumpRabbit();
 

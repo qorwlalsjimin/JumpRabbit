@@ -17,7 +17,8 @@ public class GClearPanel extends JPanel implements ActionListener {
     JButton btnRe = new JButton(new ImageIcon("images/icon_game_return.png"));
     JButton btnRank = new JButton(new ImageIcon("images/icon_game_rank.png"));
 
-    JLabel labelScore = new JLabel(Integer.toString(ScoreDB.score));
+    JLabel labelScore = new JLabel();
+    static int score = -1;
 
     public GClearPanel(){
         setLayout(null);
@@ -25,8 +26,12 @@ public class GClearPanel extends JPanel implements ActionListener {
         btnRe.setBounds(549, 488, 226, 57);
         btnRank.setBounds(814, 488, 149, 57);
 
-        labelScore.setBounds(465, 373, 200, 45);
-        labelScore.setFont(Main.font.deriveFont(64f));
+        labelScore.setText("294");
+        score = Integer.parseInt(labelScore.getText());
+
+        labelScore.setBounds(485, 353, 200, 110);
+        labelScore.setHorizontalAlignment(JLabel.CENTER);
+        labelScore.setFont(Main.font.deriveFont(110f));
         labelScore.setForeground(Main.defaultColor);
 
         //	버튼 윤곽선, 배경색 없애기
@@ -75,7 +80,7 @@ public class GClearPanel extends JPanel implements ActionListener {
 
                 System.out.println("닉네임: "+JoinNamePanel.Nickname);
                 pstmt.setString(1, JoinNamePanel.Nickname);
-                pstmt.setInt(2, 450);
+                pstmt.setInt(2, score);
 
                 System.out.println("insert됨");
             }else{ //닉네임 있음 update
@@ -83,7 +88,7 @@ public class GClearPanel extends JPanel implements ActionListener {
                 pstmt = conn.prepareStatement(sql);
 
                 System.out.println("닉네임: "+JoinNamePanel.Nickname);
-                pstmt.setInt(1, 656);
+                pstmt.setInt(1, score);
                 pstmt.setString(2, JoinNamePanel.Nickname);
 
                 System.out.println("update됨");

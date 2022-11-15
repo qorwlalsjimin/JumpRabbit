@@ -50,6 +50,14 @@ public class JumpRabbit extends JFrame {
 
 		panel.setBounds(0,0,1200,800);
 
+
+		// 커스텀 마우스 커서
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image cursorimage = tk.getImage("images/HH.png");
+		Point point = new Point(10,10);
+		Cursor cursor = tk.createCustomCursor(cursorimage, point, "");
+		panel.setCursor(cursor);
+
 		contentPane.add(panel);
 
         //* Frame 기본 설정

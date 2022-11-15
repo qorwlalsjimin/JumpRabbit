@@ -119,15 +119,16 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 			try{
 				//SQLite
 //				Class.forName("org.sqlite.JDBC");
-//				String dbFile = "src/JumpRabbitDB.db";
-//				Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+//				String url = "jdbc:sqlite:D:\\JumpRabbit\\JumpRabbitDB.db";
+//				Connection conn = DriverManager.getConnection(url);
 
 				//TODO: 로그인 상태 유지
 				String url = "jdbc:mysql://localhost:3306/jumprabbit";
 				String userName = "jumprabbit";
 				String password = "jumprabbit";
-				String sql = "select * from user_information where id='"+inputID+"';";
 				Connection conn = DriverManager.getConnection(url, userName, password);
+
+				String sql = "select * from user_information where id='"+inputID+"';";
 				Statement st = conn.createStatement();
 
 				ResultSet rs = null;
@@ -189,11 +190,15 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-
+		if(e.getSource().toString().contains("회원가입")){
+			labelJoin.setForeground(Color.decode("#FFB7E0"));
+			System.out.println("진입햇자나요");
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-
+		if(e.getSource().toString().contains("회원가입"))
+			labelJoin.setForeground(Main.defaultColor);
 	}
 }

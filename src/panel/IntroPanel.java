@@ -4,6 +4,7 @@ import JumpRabbit.JumpRabbit;
 import JumpRabbit.Main;
 import dialog.LogoutDialog;
 import dialog.GuestDialog;
+import sun.font.FontManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.TextAttribute;
+import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,6 +56,8 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 		// 라벨 글씨 설정
 		labelLogin.setFont(Main.font.deriveFont(30f));
 		labelName.setFont(Main.font.deriveFont(30f));
+
+//		labelLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		labelLogin.setForeground(Main.defaultColor);
 		labelName.setForeground(Main.defaultColor);
@@ -144,25 +149,60 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		if(e.getSource().toString().contains("LOGIN")){
+			labelLogin.setForeground(Color.decode("#FFB7E0"));
+		} else if(e.getSource().toString().contains("LOGOUT")){
+			labelLogin.setForeground(Color.decode("#FFB7E0"));
+		}
 
+		else if(e.getSource().toString().contains("icon_start")){
+			btnStart.setIcon(new ImageIcon("images/icon_start_entered.png"));
+
+		}else if(e.getSource().toString().contains("icon_how")){
+			btnHow.setIcon(new ImageIcon("images/icon_how_entered.png"));
+
+		}else if(e.getSource().toString().contains("icon_rank")){
+			btnRank.setIcon(new ImageIcon("images/icon_rank_entered.png"));
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if(e.getSource().toString().contains("LOGIN")){
-
+			labelLogin.setForeground(Main.defaultColor);
+		} else if(e.getSource().toString().contains("LOGOUT")){
+			labelLogin.setForeground(Main.defaultColor);
 		}
 
 		else if(e.getSource().toString().contains("icon_start")){
-			System.out.println("시작?");
+			btnStart.setIcon(new ImageIcon("images/icon_start.png"));
 
 		}else if(e.getSource().toString().contains("icon_how")){
-			System.out.println("방법?");
+			btnHow.setIcon(new ImageIcon("images/icon_how.png"));
 
 		}else if(e.getSource().toString().contains("icon_rank")){
-			System.out.println("랭킹?");
+			btnRank.setIcon(new ImageIcon("images/icon_rank.png"));
 		}
 	}
 
+	public static void drawFancyString(Graphics2D g, String str, int x, int y, float size, Color internalColor) {
+		if(str.length()==0)return;
+		AffineTransform orig = g.getTransform();
+		Font f = Main.font.deriveFont(30f);
+		TextLayout tl = new TextLayout(str, f, g.getFontRenderContext());
+		AffineTransform transform = g.getTransform();
+		FontMetrics fm = g.getFontMetrics(f);
+		Shape outline = tl.getOutline(null);
+		Rectangle bound = outline.getBounds();
+		transform.translate(x, y+fm.getAscent());
 
+		g.setTransform(transform);
+		g.setColor(internalColor);
+		g.fill(outline);
+		g.setStroke(new BasicStroke(size/25));
+		g.setColor(Color.BLACK);
+		g.draw(outline);
+
+		g.setTransform(orig);
+	}
 }
