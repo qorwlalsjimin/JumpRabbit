@@ -5,21 +5,18 @@ import JumpRabbit.Main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-public class JoinNamePanel extends JPanel implements ActionListener, KeyListener {
+public class JoinNamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 
 	JLabel labelNotice = new JLabel("NAME");
 	public static CustomTextField textNickname = new CustomTextField();
 	public static String Nickname = "";
-	ImageIcon howScreen = new ImageIcon("images/screen_join.png");
-	static JButton btnRankBack = new JButton(new ImageIcon("images/icon_rank_back.png"));
+	ImageIcon howScreen = new ImageIcon("images/screen_nickname.png");
+	static JButton btnBack = new JButton(new ImageIcon("images/icon_back.png"));
 
 	static public String inputID;
 
@@ -28,13 +25,14 @@ public class JoinNamePanel extends JPanel implements ActionListener, KeyListener
 		//TODO: 회원가입 중 돌아가기 기능, 닉네임 없는 계정은 자동 삭제
 
 		// 뒤로 돌아가기 버튼
-		btnRankBack.setBounds(1070, 700, 102, 64);
-		btnRankBack.setBorderPainted(false); btnRankBack.setContentAreaFilled(false);
-		add(btnRankBack);
-		btnRankBack.addActionListener(this);
+		btnBack.setBounds(1070, 700, 102, 64);
+		btnBack.setBorderPainted(false); btnBack.setContentAreaFilled(false);
+		add(btnBack);
+		btnBack.addActionListener(this);
+		btnBack.addMouseListener(this);
 
 		// 정의
-		labelNotice.setBounds(335, 370, 182, 56);
+		labelNotice.setBounds(335, 377, 182, 56);
 		textNickname.setBounds(473, 368, 404, 68);
 
 		labelNotice.setFont(Main.font.deriveFont(60f));
@@ -61,7 +59,7 @@ public class JoinNamePanel extends JPanel implements ActionListener, KeyListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
-		if(ob == btnRankBack){
+		if(ob == btnBack){
 			JumpRabbit.setCurrentPanel("login");
 		}
 	}
@@ -104,4 +102,32 @@ public class JoinNamePanel extends JPanel implements ActionListener, KeyListener
 
 	@Override
 	public void keyReleased(KeyEvent e) {}
+
+	//마우스 리스너 추상메서드 구현
+	@Override
+	public void mouseClicked(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		if(e.getSource().toString().contains("icon_back"))
+			btnBack.setIcon(new ImageIcon("images/icon_back_entered.png"));
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		if(e.getSource().toString().contains("icon_back_entered"))
+			btnBack.setIcon(new ImageIcon("images/icon_back.png"));
+	}
 }

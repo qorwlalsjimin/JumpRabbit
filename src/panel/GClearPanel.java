@@ -8,10 +8,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-public class GClearPanel extends JPanel implements ActionListener {
+public class GClearPanel extends JPanel implements ActionListener, MouseListener {
     ImageIcon clearScreen = new ImageIcon("images/screen_gameclear.png");
 
     JButton btnRe = new JButton(new ImageIcon("images/icon_game_return.png"));
@@ -44,6 +46,9 @@ public class GClearPanel extends JPanel implements ActionListener {
 
         btnRe.addActionListener(this);
         btnRank.addActionListener(this);
+
+        btnRe.addMouseListener(this);
+        btnRank.addMouseListener(this);
     }
 
 
@@ -107,5 +112,32 @@ public class GClearPanel extends JPanel implements ActionListener {
                 e.printStackTrace();
             }
         }
+    }
+
+    // 마우스 리스너 추상메서드 구현
+    @Override
+    public void mouseClicked(MouseEvent e) {}
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if(e.getSource().toString().contains("icon_game_rank")){
+            btnRank.setIcon(new ImageIcon("images/icon_game_rank_entered.png"));
+        }
+        else if(e.getSource().toString().contains("icon_game_return"))
+            btnRe.setIcon(new ImageIcon("images/icon_game_return_entered.png"));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if(e.getSource().toString().contains("icon_game_rank_entered"))
+            btnRank.setIcon(new ImageIcon("images/icon_game_rank.png"));
+        else if(e.getSource().toString().contains("icon_game_return_entered"))
+            btnRe.setIcon(new ImageIcon("images/icon_game_return.png"));
     }
 }

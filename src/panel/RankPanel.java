@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,7 +16,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class RankPanel extends JPanel implements ActionListener {
+public class RankPanel extends JPanel implements ActionListener, MouseListener {
     final int X_RANK = 380;
     final int X_NAME = 450;
     final int X_SCORE = 660;
@@ -26,7 +28,7 @@ public class RankPanel extends JPanel implements ActionListener {
     final int H_LABEL = 50;
 
     // 버튼
-    static JButton btnRankBack = new JButton(new ImageIcon("images/icon_rank_back.png"));
+    static JButton btnBack = new JButton(new ImageIcon("images/icon_back.png"));
 
     ImageIcon rankScreen = new ImageIcon("images/screen_rank.png");
 
@@ -41,10 +43,12 @@ public class RankPanel extends JPanel implements ActionListener {
         setLayout(null);
 
         // 뒤로 돌아가기 버튼
-	    btnRankBack.setBounds(1070, 700, 102, 64);
-	    btnRankBack.setBorderPainted(false); btnRankBack.setContentAreaFilled(false);
-	    add(btnRankBack);
-        btnRankBack.addActionListener(this);
+	    btnBack.setBounds(1070, 700, 102, 64);
+	    btnBack.setBorderPainted(false); btnBack.setContentAreaFilled(false);
+	    add(btnBack);
+
+        btnBack.addActionListener(this);
+        btnBack.addMouseListener(this);
     }
 
     public void printRanking() {
@@ -54,7 +58,6 @@ public class RankPanel extends JPanel implements ActionListener {
 
 
         try{
-
             String url = "jdbc:mysql://localhost:3306/jumprabbit";
             String userName = "jumprabbit";
             String password = "jumprabbit";
@@ -178,7 +181,29 @@ public class RankPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object ob = e.getSource();
 
-        if(ob == btnRankBack)
+        if(ob == btnBack)
             JumpRabbit.setCurrentPanel("intro");
+    }
+
+    // 마우스 리스너 추상 메서드 구현
+    @Override
+    public void mouseClicked(MouseEvent e) {}
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if(e.getSource().toString().contains("icon_back"))
+            btnBack.setIcon(new ImageIcon("images/icon_back_entered.png"));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if(e.getSource().toString().contains("icon_back_entered"))
+            btnBack.setIcon(new ImageIcon("images/icon_back.png"));
     }
 }

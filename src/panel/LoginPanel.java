@@ -19,8 +19,8 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 
 	JLabel labelID = new JLabel("ID");
 	JLabel labelPW = new JLabel("PW");
-	JLabel labelJoin = new JLabel("회원가입");
-	static JButton btnRankBack = new JButton(new ImageIcon("images/icon_rank_back.png"));
+	JButton btnJoin = new JButton(new ImageIcon("images/icon_join.png"));
+	static JButton btnBack = new JButton(new ImageIcon("images/icon_back.png"));
 
 
 	public static CustomTextField textID = new CustomTextField();
@@ -33,31 +33,23 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
     	setLayout(null);
 
 		// 뒤로 돌아가기 버튼
-		btnRankBack.setBounds(1070, 700, 102, 64);
-		btnRankBack.setBorderPainted(false); btnRankBack.setContentAreaFilled(false);
-		add(btnRankBack);
-		btnRankBack.addActionListener(this);
+		btnBack.setBounds(1070, 700, 102, 64);
+		btnBack.setBorderPainted(false); btnBack.setContentAreaFilled(false);
+		add(btnBack);
+		btnBack.addActionListener(this);
 
     	//	정의
 	    labelID.setBounds(322, 341, 182, 56);
 		labelPW.setBounds(323, 455, 182, 56);
-		labelJoin.setBounds(720,480,200,100);
+		btnJoin.setBounds(720,480,200,100);
 		textID.setBounds(430, 323, 404, 68);
 		textPW.setBounds(430, 433, 404, 68);
 
 		labelID.setFont(Main.font.deriveFont(60f));
 		labelPW.setFont(Main.font.deriveFont(60f));
-		labelJoin.setFont(Main.font.deriveFont(30f));
 
 		labelID.setForeground(Main.defaultColor);
 		labelPW.setForeground(Main.defaultColor);
-		labelJoin.setForeground(Main.defaultColor);
-
-		// 회원가입 밑줄
-		Font underlinefont = labelJoin.getFont();
-		Map<TextAttribute, Object> attributes = new HashMap<>(underlinefont.getAttributes());
-		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-		labelJoin.setFont(underlinefont.deriveFont(attributes));
 
 		textID.setHint("아이디를 입력하세요.");
 		textPW.setHint("비밀번호를 입력하세요.");
@@ -65,13 +57,17 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 		textID.setBackgroundImage("images/textfield.png");
 		textPW.setBackgroundImage("images/textfield.png");
 
+		//JButton 기본 배경, 윤곽선 없애기
+		btnJoin.setBorderPainted(false); btnJoin.setContentAreaFilled(false);
+
 	    add(labelID);
 	    add(labelPW);
-		add(labelJoin);
+		add(btnJoin);
 		add(textID);
 		add(textPW);
 
-		labelJoin.addMouseListener(this);
+		btnJoin.addMouseListener(this);
+		btnBack.addMouseListener(this);
 		textID.addKeyListener(this);
 		textPW.addKeyListener(this);
 
@@ -99,7 +95,7 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
 
-		if(ob == btnRankBack){
+		if(ob == btnBack){
 			JumpRabbit.setCurrentPanel("intro");
 			setBlank();
 		}
@@ -122,7 +118,6 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 //				String url = "jdbc:sqlite:D:\\JumpRabbit\\JumpRabbitDB.db";
 //				Connection conn = DriverManager.getConnection(url);
 
-				//TODO: 로그인 상태 유지
 				String url = "jdbc:mysql://localhost:3306/jumprabbit";
 				String userName = "jumprabbit";
 				String password = "jumprabbit";
@@ -174,7 +169,7 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 	//마우스 리스너
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(e.getSource().toString().contains("회원가입"))
+		if(e.getSource().toString().contains("icon_join"))
 			JumpRabbit.setCurrentPanel("join");
 	}
 
@@ -190,15 +185,18 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		if(e.getSource().toString().contains("회원가입")){
-			labelJoin.setForeground(Color.decode("#FFB7E0"));
-			System.out.println("진입햇자나요");
-		}
+		if(e.getSource().toString().contains("icon_join")){
+			btnJoin.setIcon(new ImageIcon("images/icon_join_entered.png"));
+		}else
+		if(e.getSource().toString().contains("icon_back"))
+			btnBack.setIcon(new ImageIcon("images/icon_back_entered.png"));
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		if(e.getSource().toString().contains("회원가입"))
-			labelJoin.setForeground(Main.defaultColor);
+		if(e.getSource().toString().contains("icon_join"))
+			btnJoin.setIcon(new ImageIcon("images/icon_join.png"));
+		else if(e.getSource().toString().contains("icon_back_entered"))
+			btnBack.setIcon(new ImageIcon("images/icon_back.png"));
 	}
 }

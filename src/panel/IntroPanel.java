@@ -62,10 +62,6 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 		labelLogin.setForeground(Main.defaultColor);
 		labelName.setForeground(Main.defaultColor);
 
-
-		// 텍스트 테두리
-		// TODO : 마우스 entered하면 색 바뀌는 효과
-
 		// 닉네임 라벨 밑줄
 		Font underlinefont = labelName.getFont();
 		Map<TextAttribute, Object> attributes = new HashMap<>(underlinefont.getAttributes());

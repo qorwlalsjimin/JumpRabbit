@@ -6,34 +6,28 @@ import JumpRabbit.Main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-public class JoinPanel extends JPanel implements ActionListener, KeyListener {
+public class JoinPanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 
 	JLabel labelID = new JLabel("ID");
 	JLabel labelPW = new JLabel("PW");
 	public static CustomTextField textID = new CustomTextField();
 	public static CustomTextField textPW = new CustomTextField();
-    ImageIcon howScreen = new ImageIcon("images/screen_login.png");
-	static JButton btnRankBack = new JButton(new ImageIcon("images/icon_rank_back.png"));
+    ImageIcon howScreen = new ImageIcon("images/screen_join.png");
+	static JButton btnBack = new JButton(new ImageIcon("images/icon_back.png"));
 
     public JoinPanel() {
     	setLayout(null);
 
-		//TODO: 로그아웃 후에 남아있는 textfield 값 지우기
-		//TODO: 디자인 크기대로 label, textfield 위치 조정하기
-
 		// 뒤로 돌아가기 버튼
-		btnRankBack.setBounds(1070, 700, 102, 64);
-		btnRankBack.setBorderPainted(false); btnRankBack.setContentAreaFilled(false);
-		add(btnRankBack);
-		btnRankBack.addActionListener(this);
+		btnBack.setBounds(1070, 700, 102, 64);
+		btnBack.setBorderPainted(false); btnBack.setContentAreaFilled(false);
+		add(btnBack);
+		btnBack.addActionListener(this);
 
     	//	정의
 		labelID.setBounds(322, 341, 182, 56);
@@ -61,6 +55,8 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 		textID.addKeyListener(this);
 		textPW.addKeyListener(this);
 
+		btnBack.addMouseListener(this);
+		
 		addKeyListener(this);
 		requestFocus();
     }
@@ -76,7 +72,7 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
 
-		if(ob == btnRankBack){
+		if(ob == btnBack){
 			JumpRabbit.setCurrentPanel("login");
 			setBlank();
 		}
@@ -146,6 +142,34 @@ public class JoinPanel extends JPanel implements ActionListener, KeyListener {
 		}
 	}
 
+	// 마우스 리스너 추상 메서드 구현
 	@Override
 	public void keyReleased(KeyEvent e) {}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		if(e.getSource().toString().contains("icon_back"))
+			btnBack.setIcon(new ImageIcon("images/icon_back_entered.png"));
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		if(e.getSource().toString().contains("icon_back_entered"))
+			btnBack.setIcon(new ImageIcon("images/icon_back.png"));
+	}
 }
