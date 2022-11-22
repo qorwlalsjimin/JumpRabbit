@@ -14,8 +14,9 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-        // 폰트
+
         try{
+            // 폰트
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/neodgm.ttf"));
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/neodgm.ttf")));

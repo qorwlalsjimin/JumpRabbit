@@ -2,8 +2,10 @@ package JumpRabbit;
 
 import panel.*;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class JumpRabbit extends JFrame {
 
@@ -23,6 +25,10 @@ public class JumpRabbit extends JFrame {
 	LoginPanel pLogin = new LoginPanel();
 	JoinPanel pJoin = new JoinPanel();
 	JoinNamePanel pJoinName = new JoinNamePanel();
+
+	// Music 객체
+	static Music introMusic;
+	static Music gameMusic;
 
 	//폰트
 	Font font;
@@ -47,6 +53,9 @@ public class JumpRabbit extends JFrame {
 		panel.add("nickname", pJoinName);
 
 		card.show(panel, "intro"); // 실행하자 마자 보이는
+
+		introMusic = new Music("bgm_basic", true);
+		introMusic.start();
 
 		panel.setBounds(0,0,1200,800);
 
@@ -94,6 +103,10 @@ public class JumpRabbit extends JFrame {
 
 			case "game":
 				card.show(panel, "game");
+				//gameMusic = new Music("bgm_game", true);
+				//gameMusic.start();
+				//introMusic.close();
+
 				break;
 
 			case "over":
@@ -118,5 +131,7 @@ public class JumpRabbit extends JFrame {
 				break;
 		}
 	}
+
+
 
 }
