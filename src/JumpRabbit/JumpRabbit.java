@@ -53,7 +53,7 @@ public class JumpRabbit extends JFrame {
 		panel.add("nickname", pJoinName);
 
 		card.show(panel, "intro"); // 실행하자 마자 보이는
-
+		System.out.println("생성자에서 인트로 음악 실행");
 		introMusic = new Music("bgm_basic", true);
 		introMusic.start();
 
@@ -90,6 +90,13 @@ public class JumpRabbit extends JFrame {
 		switch (currentPanel) {
 			case "intro":
 				card.show(panel, "intro");
+				if(gameMusic.getState() == Thread.State.TERMINATED){
+					gameMusic.close();
+				}
+				if(introMusic.getState() == Thread.State.TERMINATED){
+					introMusic = new Music("bgm_basic", true);
+					introMusic.start();
+				}
 				break;
 
 			case "how":
@@ -103,9 +110,10 @@ public class JumpRabbit extends JFrame {
 
 			case "game":
 				card.show(panel, "game");
-				//gameMusic = new Music("bgm_game", true);
-				//gameMusic.start();
-				//introMusic.close();
+				introMusic.close();
+				System.out.println("인트로 닫음");
+				gameMusic = new Music("bgm_game", true);
+				gameMusic.start();
 
 				break;
 
