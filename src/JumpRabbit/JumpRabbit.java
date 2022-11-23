@@ -27,8 +27,7 @@ public class JumpRabbit extends JFrame {
 	JoinNamePanel pJoinName = new JoinNamePanel();
 
 	// Music 객체
-	static Music introMusic;
-	static Music gameMusic;
+	static Music introMusic, gameMusic, gameclearMusic, gameoverMusic;
 
 	//폰트
 	Font font;
@@ -89,13 +88,16 @@ public class JumpRabbit extends JFrame {
 
 		switch (currentPanel) {
 			case "intro":
+				//TODO: 인트로 화면 들어올때마다 새로 생성돼서 겹쳐서 들림
 				card.show(panel, "intro");
-				if(gameMusic.getState() == Thread.State.TERMINATED){
+				if(gameMusic != null && gameMusic.getState() == Thread.State.TERMINATED){
 					gameMusic.close();
 				}
-				if(introMusic.getState() == Thread.State.TERMINATED){
+				if(introMusic != null && introMusic.getState() == Thread.State.TERMINATED){
+					System.out.println("인트로연 " + introMusic.getState());
 					introMusic = new Music("bgm_basic", true);
 					introMusic.start();
+					System.out.println("인트로연 " + introMusic.getState());
 				}
 				break;
 
@@ -119,15 +121,26 @@ public class JumpRabbit extends JFrame {
 
 			case "over":
 				card.show(panel, "over");
+				if(gameMusic.getState() == Thread.State.TERMINATED && gameMusic!=null){
+					gameMusic.close();
+				}
+				gameoverMusic = new Music("sound_gameover", true);
+				gameoverMusic.start();
 				break;
 
 			case "clear":
 				card.show(panel, "clear");
 				(new GClearPanel()).insertScore(false);
+				if(gameMusic.getState() == Thread.State.TERMINATED && gameMusic!=null){
+					gameMusic.close();
+				}
+				gameclearMusic = new Music("sound_gameclear", true);
+				gameclearMusic.start();
 				break;
 
 			case "login":
 				card.show(panel, "login");
+				System.out.println("인트로연 " + introMusic.getState());
 				break;
 
 			case "join":
