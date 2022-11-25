@@ -6,8 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class GOverPanel extends JPanel implements ActionListener {
+public class GOverPanel extends JPanel implements ActionListener, MouseListener {
     ImageIcon overScreen = new ImageIcon("images/screen_gameover.png");
 
     JButton btnRe = new JButton(new ImageIcon("images/icon_game_return.png"));
@@ -31,6 +33,9 @@ public class GOverPanel extends JPanel implements ActionListener {
         btnRe.addActionListener(this);
         btnRank.addActionListener(this);
 
+        btnRe.addMouseListener(this);
+        btnRank.addMouseListener(this);
+
     }
 
 
@@ -48,5 +53,32 @@ public class GOverPanel extends JPanel implements ActionListener {
             JumpRabbit.setCurrentPanel("game");
         else if(ob == btnRank)
             JumpRabbit.setCurrentPanel("rank");
+    }
+
+    // 마우스 리스너 추상메서드 구현
+    @Override
+    public void mouseClicked(MouseEvent e) {}
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if(e.getSource().toString().contains("icon_game_rank")){
+            btnRank.setIcon(new ImageIcon("images/icon_game_rank_entered.png"));
+        }
+        else if(e.getSource().toString().contains("icon_game_return"))
+            btnRe.setIcon(new ImageIcon("images/icon_game_return_entered.png"));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if(e.getSource().toString().contains("icon_game_rank_entered"))
+            btnRank.setIcon(new ImageIcon("images/icon_game_rank.png"));
+        else if(e.getSource().toString().contains("icon_game_return_entered"))
+            btnRe.setIcon(new ImageIcon("images/icon_game_return.png"));
     }
 }

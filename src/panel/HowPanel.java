@@ -7,8 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class HowPanel extends JPanel implements ActionListener{
+public class HowPanel extends JPanel implements ActionListener, MouseListener {
 
     // ¹öÆ°
     static JButton btnHowStart = new JButton(new ImageIcon("images/icon_how_start.png"));
@@ -25,6 +27,8 @@ public class HowPanel extends JPanel implements ActionListener{
 	    btnHowStart.setContentAreaFilled(false);
 	    add(btnHowStart);
 		btnHowStart.addActionListener(this);
+
+		btnHowStart.addMouseListener(this);
 	    
     }
 
@@ -47,5 +51,33 @@ public class HowPanel extends JPanel implements ActionListener{
 				JumpRabbit.setCurrentPanel("game");
 			}
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		if(e.getSource().toString().contains("icon_how_start")){
+			btnHowStart.setIcon(new ImageIcon("images/icon_how_start_entered.png"));
+		}
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		if(e.getSource().toString().contains("icon_how_start_entered"))
+			btnHowStart.setIcon(new ImageIcon("images/icon_how_start.png"));
 	}
 }

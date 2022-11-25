@@ -31,6 +31,7 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 	public static Boolean isLogin = false;
     ImageIcon mainScreen = new ImageIcon("images/screen_main.png");
 
+
     public IntroPanel() {
     	setLayout(null);
     	
@@ -47,7 +48,7 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 	    btnRank.setBounds(867, 614, 162, 61);
 		labelLogin.setBounds(1080, 10, 150,50);
 		labelName.setBounds(1000, 10, 150, 50);
-	    
+
 	    //	버튼 윤곽선, 배경색 없애기
 	    btnStart.setBorderPainted(false); btnStart.setContentAreaFilled(false);
 	    btnHow.setBorderPainted(false); btnHow.setContentAreaFilled(false);
@@ -83,7 +84,7 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
         add(btnHow);
         add(btnRank);
 		add(labelLogin);
-    }
+	}
 
 	// 배경 이미지 설정
 	public void paintComponent(Graphics g) {
@@ -117,8 +118,9 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 		}
 		else if(ob == btnHow)
 			JumpRabbit.setCurrentPanel("how");
-		else if(ob == btnRank)
+		else if(ob == btnRank){
 			JumpRabbit.setCurrentPanel("rank");
+		}
 
 	}
 
@@ -179,26 +181,5 @@ public class IntroPanel extends JPanel implements ActionListener, MouseListener 
 		}else if(e.getSource().toString().contains("icon_rank")){
 			btnRank.setIcon(new ImageIcon("images/icon_rank.png"));
 		}
-	}
-
-	public static void drawFancyString(Graphics2D g, String str, int x, int y, float size, Color internalColor) {
-		if(str.length()==0)return;
-		AffineTransform orig = g.getTransform();
-		Font f = Main.font.deriveFont(30f);
-		TextLayout tl = new TextLayout(str, f, g.getFontRenderContext());
-		AffineTransform transform = g.getTransform();
-		FontMetrics fm = g.getFontMetrics(f);
-		Shape outline = tl.getOutline(null);
-		Rectangle bound = outline.getBounds();
-		transform.translate(x, y+fm.getAscent());
-
-		g.setTransform(transform);
-		g.setColor(internalColor);
-		g.fill(outline);
-		g.setStroke(new BasicStroke(size/25));
-		g.setColor(Color.BLACK);
-		g.draw(outline);
-
-		g.setTransform(orig);
 	}
 }

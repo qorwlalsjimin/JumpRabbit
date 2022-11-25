@@ -27,12 +27,11 @@ public class RankPanel extends JPanel implements ActionListener, MouseListener {
     final int W_SCORE = 200;
     final int H_LABEL = 50;
 
+    ImageIcon rankScreen = new ImageIcon("images/screen_rank.png");
+
     // 버튼
     static JButton btnBack = new JButton(new ImageIcon("images/icon_back.png"));
 
-    ImageIcon rankScreen = new ImageIcon("images/screen_rank.png");
-
-    JLabel labelRank, labelName, labelScore;
     ArrayList<JLabel> listRank = new ArrayList<>();
     ArrayList<JLabel> listName = new ArrayList<>();
     ArrayList<JLabel> listGrade = new ArrayList<>();
@@ -52,10 +51,9 @@ public class RankPanel extends JPanel implements ActionListener, MouseListener {
     }
 
     public void printRanking() {
-        System.out.println("랭킹 메서드 진입");
         this.listScore.clear();
         clearAllGen();
-
+        System.out.println("랭킹 메서드 진입2");
 
         try{
             String url = "jdbc:mysql://localhost:3306/jumprabbit";
@@ -83,6 +81,8 @@ public class RankPanel extends JPanel implements ActionListener, MouseListener {
         }catch (Exception e){
             e.printStackTrace();
         }
+        //(new IntroPanel()).hideLoading();
+        System.out.println("랭킹 메서드 진입3");
 
         // TODO: 점수가 같으면 하나의 닉네임으로만 보이는 오류
         // score을 넣은 리스트(int)
@@ -109,6 +109,8 @@ public class RankPanel extends JPanel implements ActionListener, MouseListener {
 
         listScore.clear();
         listScore2.clear();
+
+        System.out.println("랭킹 메서드 진입4");
     }
 
     private void callAllGen(int x, int rank, int i) { // x는 스코어가 높은 점수대로 넣어줘야함
