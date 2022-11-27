@@ -107,16 +107,11 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		//엔터 입력시 화면 이동
 		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 			String inputID = textID.getText();
 			String inputPW = textPW.getText();
 
 			try{
-				//SQLite
-//				Class.forName("org.sqlite.JDBC");
-//				String url = "jdbc:sqlite:D:\\JumpRabbit\\JumpRabbitDB.db";
-//				Connection conn = DriverManager.getConnection(url);
 
 				String url = "jdbc:mysql://localhost:3306/jumprabbit";
 				String userName = "jumprabbit";
@@ -141,6 +136,8 @@ public class LoginPanel extends JPanel implements ActionListener, KeyListener, M
 				else if(inputPW.equals(rs.getString("pw"))){
 					System.out.println("로그인 성공");
 					IntroPanel.isLogin = true;
+
+					//화면 이동
 					JumpRabbit.setCurrentPanel("intro");
 				}
 				else{
